@@ -1,0 +1,248 @@
+{
+  "description": "Réseau autoroutier français à péage — gares de péage et jonctions",
+  "autoroutes": [
+    {
+      "code": "A6",
+      "nom": "Autoroute du Soleil (Paris → Lyon)",
+      "gares": [
+        { "id": "a6-fleury", "nom": "Fleury-en-Bière", "km": 40 },
+        { "id": "a6-nemours", "nom": "Nemours", "km": 75 },
+        { "id": "a6-dordives", "nom": "Dordives", "km": 90 },
+        { "id": "a6-courtenay", "nom": "Courtenay", "km": 120 },
+        { "id": "a6-auxerre-nord", "nom": "Auxerre Nord", "km": 150 },
+        { "id": "a6-auxerre-sud", "nom": "Auxerre Sud", "km": 165 },
+        { "id": "a6-nitry", "nom": "Nitry", "km": 190 },
+        { "id": "a6-avallon", "nom": "Avallon", "km": 210 },
+        { "id": "a6-semur", "nom": "Bierre-lès-Semur", "km": 235 },
+        { "id": "a6-pouilly", "nom": "Pouilly-en-Auxois", "km": 265 },
+        { "id": "a6-beaune", "nom": "Beaune", "km": 300 },
+        { "id": "a6-chalon-nord", "nom": "Chalon-sur-Saône Nord", "km": 325 },
+        { "id": "a6-chalon-sud", "nom": "Chalon-sur-Saône Sud", "km": 335 },
+        { "id": "a6-tournus", "nom": "Tournus", "km": 355 },
+        { "id": "a6-macon-nord", "nom": "Mâcon Nord", "km": 375 },
+        { "id": "a6-macon-sud", "nom": "Mâcon Sud", "km": 390 },
+        { "id": "a6-belleville", "nom": "Belleville-en-Beaujolais", "km": 405 },
+        { "id": "a6-villefranche", "nom": "Villefranche-sur-Saône", "km": 415 },
+        { "id": "a6-lyon-limonest", "nom": "Lyon Porte de Lyon (Limonest)", "km": 445 }
+      ]
+    },
+    {
+      "code": "A7",
+      "nom": "Autoroute du Soleil (Lyon → Marseille)",
+      "gares": [
+        { "id": "a7-lyon-sud", "nom": "Lyon Sud (Solaize)", "km": 0 },
+        { "id": "a7-vienne", "nom": "Vienne", "km": 30 },
+        { "id": "a7-chanas", "nom": "Chanas", "km": 55 },
+        { "id": "a7-tain", "nom": "Tain-l'Hermitage", "km": 85 },
+        { "id": "a7-valence-nord", "nom": "Valence Nord", "km": 100 },
+        { "id": "a7-valence-sud", "nom": "Valence Sud", "km": 115 },
+        { "id": "a7-loriol", "nom": "Loriol", "km": 130 },
+        { "id": "a7-montelimar-nord", "nom": "Montélimar Nord", "km": 150 },
+        { "id": "a7-montelimar-sud", "nom": "Montélimar Sud", "km": 170 },
+        { "id": "a7-bollene", "nom": "Bollène", "km": 190 },
+        { "id": "a7-orange", "nom": "Orange Centre", "km": 210 },
+        { "id": "a7-avignon-nord", "nom": "Avignon Nord", "km": 230 },
+        { "id": "a7-avignon-sud", "nom": "Avignon Sud", "km": 245 },
+        { "id": "a7-cavaillon", "nom": "Cavaillon", "km": 260 },
+        { "id": "a7-senas", "nom": "Sénas", "km": 275 },
+        { "id": "a7-salon", "nom": "Salon-de-Provence", "km": 290 },
+        { "id": "a7-lancon", "nom": "Lançon-Provence", "km": 300 },
+        { "id": "a7-marseille", "nom": "Marseille (Saint-Charles)", "km": 330 }
+      ]
+    },
+    {
+      "code": "A8",
+      "nom": "La Provençale (Aix → Nice)",
+      "gares": [
+        { "id": "a8-coudoux", "nom": "Coudoux", "km": 0 },
+        { "id": "a8-aix-ouest", "nom": "Aix-en-Provence Ouest", "km": 15 },
+        { "id": "a8-la-barque", "nom": "La Barque (Fuveau)", "km": 30 },
+        { "id": "a8-saint-maximin", "nom": "Saint-Maximin-la-Sainte-Baume", "km": 55 },
+        { "id": "a8-brignoles", "nom": "Brignoles", "km": 75 },
+        { "id": "a8-le-luc", "nom": "Le Luc", "km": 95 },
+        { "id": "a8-le-muy", "nom": "Le Muy", "km": 120 },
+        { "id": "a8-les-adrets", "nom": "Les Adrets-de-l'Estérel", "km": 140 },
+        { "id": "a8-antibes", "nom": "Antibes", "km": 165 },
+        { "id": "a8-nice", "nom": "Nice Saint-Isidore", "km": 185 }
+      ]
+    },
+    {
+      "code": "A9",
+      "nom": "La Languedocienne (Orange → Espagne)",
+      "gares": [
+        { "id": "a9-roquemaure", "nom": "Roquemaure", "km": 10 },
+        { "id": "a9-remoulins", "nom": "Remoulins (Pont du Gard)", "km": 25 },
+        { "id": "a9-nimes-est", "nom": "Nîmes Est", "km": 45 },
+        { "id": "a9-nimes-ouest", "nom": "Nîmes Ouest", "km": 60 },
+        { "id": "a9-gallargues", "nom": "Gallargues", "km": 80 },
+        { "id": "a9-lunel", "nom": "Lunel", "km": 90 },
+        { "id": "a9-vendargues", "nom": "Montpellier Est (Vendargues)", "km": 105 },
+        { "id": "a9-montpellier-ouest", "nom": "Montpellier Ouest (Saint-Jean-de-Védas)", "km": 115 },
+        { "id": "a9-sete", "nom": "Sète", "km": 135 },
+        { "id": "a9-agde", "nom": "Agde-Pézenas", "km": 155 },
+        { "id": "a9-beziers-est", "nom": "Béziers Est", "km": 170 },
+        { "id": "a9-beziers-ouest", "nom": "Béziers Ouest", "km": 185 },
+        { "id": "a9-narbonne-est", "nom": "Narbonne Est", "km": 210 },
+        { "id": "a9-narbonne-sud", "nom": "Narbonne Sud", "km": 220 },
+        { "id": "a9-sigean", "nom": "Sigean", "km": 235 },
+        { "id": "a9-leucate", "nom": "Leucate", "km": 250 },
+        { "id": "a9-perpignan-nord", "nom": "Perpignan Nord", "km": 270 },
+        { "id": "a9-perpignan-sud", "nom": "Perpignan Sud", "km": 285 },
+        { "id": "a9-le-boulou", "nom": "Le Boulou", "km": 300 }
+      ]
+    },
+    {
+      "code": "A10",
+      "nom": "L'Aquitaine (Paris → Bordeaux)",
+      "gares": [
+        { "id": "a10-saint-arnoult", "nom": "Saint-Arnoult-en-Yvelines", "km": 30 },
+        { "id": "a10-dourdan", "nom": "Dourdan", "km": 40 },
+        { "id": "a10-allaines", "nom": "Allaines", "km": 70 },
+        { "id": "a10-artenay", "nom": "Artenay", "km": 90 },
+        { "id": "a10-orleans-nord", "nom": "Orléans Nord", "km": 105 },
+        { "id": "a10-meung", "nom": "Meung-sur-Loire", "km": 130 },
+        { "id": "a10-blois", "nom": "Blois", "km": 160 },
+        { "id": "a10-amboise", "nom": "Amboise (Château-Renault)", "km": 185 },
+        { "id": "a10-tours-nord", "nom": "Tours Nord", "km": 210 },
+        { "id": "a10-sainte-maure", "nom": "Sainte-Maure-de-Touraine", "km": 245 },
+        { "id": "a10-chatellerault-nord", "nom": "Châtellerault Nord", "km": 270 },
+        { "id": "a10-chatellerault-sud", "nom": "Châtellerault Sud", "km": 285 },
+        { "id": "a10-poitiers-nord", "nom": "Poitiers Nord", "km": 300 },
+        { "id": "a10-poitiers-sud", "nom": "Poitiers Sud", "km": 320 },
+        { "id": "a10-niort", "nom": "Niort", "km": 370 },
+        { "id": "a10-saint-jean-angely", "nom": "Saint-Jean-d'Angély", "km": 400 },
+        { "id": "a10-saintes", "nom": "Saintes", "km": 425 },
+        { "id": "a10-mirambeau", "nom": "Mirambeau", "km": 455 },
+        { "id": "a10-bordeaux", "nom": "Bordeaux (Virsac)", "km": 540 }
+      ]
+    },
+    {
+      "code": "A11",
+      "nom": "L'Océane (Paris → Nantes)",
+      "gares": [
+        { "id": "a11-ablis", "nom": "Ablis", "km": 40 },
+        { "id": "a11-chartres", "nom": "Chartres", "km": 65 },
+        { "id": "a11-la-ferte-bernard", "nom": "La Ferté-Bernard", "km": 120 },
+        { "id": "a11-le-mans-nord", "nom": "Le Mans Nord", "km": 155 },
+        { "id": "a11-sable", "nom": "Sablé-sur-Sarthe (La Flèche)", "km": 200 },
+        { "id": "a11-durtal", "nom": "Durtal", "km": 220 },
+        { "id": "a11-angers", "nom": "Angers", "km": 250 },
+        { "id": "a11-ancenis", "nom": "Ancenis", "km": 300 },
+        { "id": "a11-nantes", "nom": "Nantes", "km": 335 }
+      ]
+    },
+    {
+      "code": "A13",
+      "nom": "Autoroute de Normandie (Paris → Caen)",
+      "gares": [
+        { "id": "a13-buchelay", "nom": "Mantes-Buchelay", "km": 40 },
+        { "id": "a13-gaillon", "nom": "Gaillon", "km": 75 },
+        { "id": "a13-louviers", "nom": "Louviers", "km": 90 },
+        { "id": "a13-beuzeville", "nom": "Beuzeville", "km": 150 },
+        { "id": "a13-dozule", "nom": "Dozulé", "km": 185 },
+        { "id": "a13-caen", "nom": "Caen", "km": 220 }
+      ]
+    },
+    {
+      "code": "A4",
+      "nom": "Autoroute de l'Est (Paris → Strasbourg)",
+      "gares": [
+        { "id": "a4-coutevroult", "nom": "Coutevroult", "km": 40 },
+        { "id": "a4-ferte-jouarre", "nom": "La Ferté-sous-Jouarre", "km": 65 },
+        { "id": "a4-chateau-thierry", "nom": "Château-Thierry", "km": 95 },
+        { "id": "a4-dormans", "nom": "Dormans", "km": 115 },
+        { "id": "a4-reims", "nom": "Reims", "km": 145 },
+        { "id": "a4-sainte-menehould", "nom": "Sainte-Menehould", "km": 195 },
+        { "id": "a4-verdun", "nom": "Verdun", "km": 230 },
+        { "id": "a4-metz", "nom": "Metz", "km": 300 },
+        { "id": "a4-phalsbourg", "nom": "Phalsbourg", "km": 390 },
+        { "id": "a4-strasbourg", "nom": "Strasbourg", "km": 450 }
+      ]
+    },
+    {
+      "code": "A43",
+      "nom": "Alpine (Lyon → Maurienne)",
+      "gares": [
+        { "id": "a43-isle-abeau", "nom": "L'Isle-d'Abeau", "km": 30 },
+        { "id": "a43-la-tour-du-pin", "nom": "La Tour-du-Pin", "km": 50 },
+        { "id": "a43-chambery", "nom": "Chambéry", "km": 90 },
+        { "id": "a43-aiton", "nom": "Aiton", "km": 120 },
+        { "id": "a43-sainte-marie", "nom": "Sainte-Marie-de-Cuines", "km": 145 },
+        { "id": "a43-saint-michel", "nom": "Saint-Michel-de-Maurienne", "km": 165 }
+      ]
+    },
+    {
+      "code": "A61",
+      "nom": "Autoroute des Deux Mers (Narbonne → Toulouse)",
+      "gares": [
+        { "id": "a61-lezignan", "nom": "Lézignan-Corbières", "km": 25 },
+        { "id": "a61-carcassonne-est", "nom": "Carcassonne Est", "km": 55 },
+        { "id": "a61-carcassonne-ouest", "nom": "Carcassonne Ouest", "km": 65 },
+        { "id": "a61-bram", "nom": "Bram", "km": 85 },
+        { "id": "a61-castelnaudary", "nom": "Castelnaudary", "km": 100 },
+        { "id": "a61-villefranche", "nom": "Villefranche-de-Lauragais", "km": 125 },
+        { "id": "a61-toulouse", "nom": "Toulouse Sud-Est", "km": 150 }
+      ]
+    },
+    {
+      "code": "A62",
+      "nom": "Autoroute des Deux Mers (Toulouse → Bordeaux)",
+      "gares": [
+        { "id": "a62-montauban", "nom": "Montauban", "km": 50 },
+        { "id": "a62-castelsarrasin", "nom": "Castelsarrasin", "km": 70 },
+        { "id": "a62-valence-agen", "nom": "Valence-d'Agen", "km": 90 },
+        { "id": "a62-agen", "nom": "Agen", "km": 115 },
+        { "id": "a62-marmande", "nom": "Marmande", "km": 150 },
+        { "id": "a62-la-reole", "nom": "La Réole", "km": 170 },
+        { "id": "a62-langon", "nom": "Langon", "km": 190 },
+        { "id": "a62-podensac", "nom": "Podensac", "km": 205 },
+        { "id": "a62-la-brede", "nom": "La Brède", "km": 215 }
+      ]
+    },
+    {
+      "code": "A63",
+      "nom": "Autoroute de la Côte Basque (Bordeaux → Espagne)",
+      "gares": [
+        { "id": "a63-saugnacq", "nom": "Saugnacq-et-Muret", "km": 40 },
+        { "id": "a63-castets", "nom": "Castets", "km": 90 },
+        { "id": "a63-benesse", "nom": "Bénesse-Maremne", "km": 130 },
+        { "id": "a63-biarritz", "nom": "Biarritz", "km": 155 },
+        { "id": "a63-biriatou", "nom": "Biriatou", "km": 175 }
+      ]
+    },
+    {
+      "code": "A71",
+      "nom": "L'Arverne (Orléans → Clermont-Ferrand)",
+      "gares": [
+        { "id": "a71-olivet", "nom": "Olivet (Orléans Sud)", "km": 10 },
+        { "id": "a71-salbris", "nom": "Salbris", "km": 60 },
+        { "id": "a71-vierzon", "nom": "Vierzon", "km": 85 },
+        { "id": "a71-bourges", "nom": "Bourges", "km": 115 },
+        { "id": "a71-saint-amand", "nom": "Saint-Amand-Montrond", "km": 155 },
+        { "id": "a71-montmarault", "nom": "Montmarault", "km": 200 },
+        { "id": "a71-gannat", "nom": "Gannat", "km": 235 },
+        { "id": "a71-riom", "nom": "Riom", "km": 255 },
+        { "id": "a71-clermont", "nom": "Clermont-Ferrand", "km": 270 }
+      ]
+    }
+  ],
+  "jonctions": [
+    { "de": "a6-lyon-limonest", "a": "a7-lyon-sud", "via": "Traversée de Lyon (gratuit)" },
+    { "de": "a6-lyon-limonest", "a": "a43-isle-abeau", "via": "Rocade Est de Lyon (gratuit)" },
+    { "de": "a7-lyon-sud", "a": "a43-isle-abeau", "via": "Rocade Est de Lyon (gratuit)" },
+    { "de": "a7-orange", "a": "a9-roquemaure", "via": "Bifurcation A7/A9 Orange" },
+    { "de": "a7-lancon", "a": "a8-coudoux", "via": "Bifurcation A7/A8 Coudoux" },
+    { "de": "a9-narbonne-est", "a": "a61-lezignan", "via": "Bifurcation A9/A61 Narbonne" },
+    { "de": "a61-toulouse", "a": "a62-montauban", "via": "Périphérique de Toulouse (gratuit)" },
+    { "de": "a62-la-brede", "a": "a10-bordeaux", "via": "Rocade de Bordeaux (gratuit)" },
+    { "de": "a62-la-brede", "a": "a63-saugnacq", "via": "Rocade de Bordeaux (gratuit)" },
+    { "de": "a10-bordeaux", "a": "a63-saugnacq", "via": "Rocade de Bordeaux (gratuit)" },
+    { "de": "a10-saint-arnoult", "a": "a11-ablis", "via": "Bifurcation A10/A11 Ablis" },
+    { "de": "a10-orleans-nord", "a": "a71-olivet", "via": "Tangentielle d'Orléans (gratuit)" },
+    { "de": "a10-saint-arnoult", "a": "a6-fleury", "via": "Francilienne (gratuit)" },
+    { "de": "a10-saint-arnoult", "a": "a13-buchelay", "via": "Francilienne (gratuit)" },
+    { "de": "a10-saint-arnoult", "a": "a4-coutevroult", "via": "Francilienne (gratuit)" },
+    { "de": "a6-fleury", "a": "a4-coutevroult", "via": "Francilienne (gratuit)" },
+    { "de": "a6-fleury", "a": "a13-buchelay", "via": "Francilienne (gratuit)" }
+  ]
+}

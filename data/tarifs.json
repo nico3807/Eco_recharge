@@ -1,0 +1,22 @@
+{
+  "description": "Grille tarifaire des péages (véhicule classe 1). Fichier mis à jour régulièrement : il est relu automatiquement par l'API à chaque modification, sans redémarrage du serveur.",
+  "derniereMiseAJour": "2026-07-01",
+  "classeVehicule": 1,
+  "arrondi": 0.1,
+  "coefficientDistance": 0.0012,
+  "tauxParKm": {
+    "A4": 0.113,
+    "A6": 0.117,
+    "A7": 0.112,
+    "A8": 0.121,
+    "A9": 0.114,
+    "A10": 0.118,
+    "A11": 0.116,
+    "A13": 0.11,
+    "A43": 0.124,
+    "A61": 0.109,
+    "A62": 0.111,
+    "A63": 0.106,
+    "A71": 0.115
+  }
+}

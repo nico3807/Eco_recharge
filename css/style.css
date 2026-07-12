@@ -1,0 +1,306 @@
+/* ============================================================
+   Éco-Péage — Feuille de style responsive (mobile first)
+   ============================================================ */
+
+:root {
+  --vert: #1a7f4b;
+  --vert-fonce: #115c36;
+  --vert-clair: #e6f4ec;
+  --bleu-nuit: #14283c;
+  --gris-fond: #f4f6f8;
+  --gris-bordure: #d7dde3;
+  --gris-texte: #5a6672;
+  --rouge: #c0392b;
+  --or: #f5a623;
+  --rayon: 12px;
+  --ombre: 0 4px 18px rgba(20, 40, 60, 0.12);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--gris-fond);
+  color: var(--bleu-nuit);
+  line-height: 1.55;
+}
+
+.conteneur {
+  width: min(960px, 100% - 2rem);
+  margin-inline: auto;
+}
+
+/* --- En-tête ------------------------------------------------ */
+
+.entete {
+  background: linear-gradient(135deg, var(--bleu-nuit), #1f3d5c);
+  color: #fff;
+  padding: 1.6rem 0 1.4rem;
+  text-align: center;
+}
+
+.entete h1 {
+  margin: 0;
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  letter-spacing: 0.5px;
+}
+
+.sous-titre {
+  margin: 0.35rem 0 0;
+  opacity: 0.85;
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+}
+
+/* --- Cartes -------------------------------------------------- */
+
+.carte {
+  background: #fff;
+  border-radius: var(--rayon);
+  box-shadow: var(--ombre);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.carte h2 { margin-top: 0; font-size: 1.3rem; }
+
+.explication { color: var(--gris-texte); font-size: 0.95rem; }
+
+/* --- Formulaire ---------------------------------------------- */
+
+.champs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+.champ { flex: 1; display: flex; flex-direction: column; }
+
+.champ label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.35rem;
+}
+
+.champ input {
+  padding: 0.75rem 0.9rem;
+  border: 1.5px solid var(--gris-bordure);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.champ input:focus {
+  outline: none;
+  border-color: var(--vert);
+  box-shadow: 0 0 0 3px rgba(26, 127, 75, 0.18);
+}
+
+.bouton-inverser {
+  align-self: center;
+  border: 1.5px solid var(--gris-bordure);
+  background: #fff;
+  border-radius: 50%;
+  width: 2.6rem;
+  height: 2.6rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.bouton-inverser:hover { background: var(--vert-clair); transform: rotate(180deg); }
+
+.bouton-principal {
+  margin-top: 1.2rem;
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--vert);
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.bouton-principal:hover:not(:disabled) { background: var(--vert-fonce); }
+.bouton-principal:disabled { opacity: 0.6; cursor: wait; }
+
+.message-erreur {
+  color: var(--rouge);
+  background: #fdecea;
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.92rem;
+  margin: 0.9rem 0 0;
+}
+
+/* --- Bloc d'informations ------------------------------------- */
+
+.etapes { padding-left: 1.2rem; color: var(--gris-texte); }
+.etapes li { margin-bottom: 0.45rem; }
+.etapes strong { color: var(--bleu-nuit); }
+
+.meta-tarifs {
+  margin-bottom: 0;
+  font-size: 0.85rem;
+  color: var(--gris-texte);
+  border-top: 1px solid var(--gris-bordure);
+  padding-top: 0.8rem;
+}
+
+/* --- Pop-up --------------------------------------------------- */
+
+.voile[hidden] { display: none; }
+
+.voile {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 40, 60, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 100;
+}
+
+.popup {
+  position: relative;
+  background: #fff;
+  border-radius: var(--rayon);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  width: min(560px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 1.6rem;
+  animation: apparition 0.22s ease-out;
+}
+
+@keyframes apparition {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+
+.popup h2 { margin: 0 0 0.3rem; font-size: 1.25rem; }
+
+.popup-trajet { color: var(--gris-texte); margin: 0 0 1.1rem; font-size: 0.95rem; }
+
+.bouton-fermer {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.8rem;
+  border: none;
+  background: none;
+  font-size: 1.7rem;
+  line-height: 1;
+  color: var(--gris-texte);
+  cursor: pointer;
+}
+
+.bouton-fermer:hover { color: var(--rouge); }
+
+.tarif-direct {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  background: var(--bleu-nuit);
+  color: #fff;
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+}
+
+.tarif-direct-libelle { font-size: 0.95rem; }
+
+.tarif-direct-prix { font-size: 1.6rem; font-weight: 800; white-space: nowrap; }
+
+.titre-tags { font-size: 1rem; margin: 1.3rem 0 0.6rem; }
+
+/* --- Tags 1 à 5 sorties --------------------------------------- */
+
+.tags { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+
+.tag {
+  border: 1.5px solid var(--gris-bordure);
+  background: #fff;
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.92rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.tag:hover { border-color: var(--vert); }
+
+.tag .tag-prix { font-weight: 700; }
+
+.tag .tag-economie {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--vert);
+}
+
+.tag.tag-actif { background: var(--vert-clair); border-color: var(--vert); }
+
+.tag.tag-meilleur {
+  background: var(--vert);
+  border-color: var(--vert);
+  color: #fff;
+}
+
+.tag.tag-meilleur .tag-economie { color: #d9f7e6; }
+
+.tag.tag-meilleur::before { content: "★"; color: var(--or); }
+
+.tag.tag-sans-gain { opacity: 0.65; }
+
+/* --- Détail des sorties ---------------------------------------- */
+
+.detail-sorties {
+  margin-top: 1rem;
+  background: var(--vert-clair);
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+}
+
+.detail-sorties h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+
+.detail-sorties ul { margin: 0; padding-left: 1.2rem; font-size: 0.92rem; }
+
+.detail-sorties li { margin-bottom: 0.25rem; }
+
+.popup-note {
+  margin: 1.1rem 0 0;
+  font-size: 0.8rem;
+  color: var(--gris-texte);
+}
+
+/* --- Pied de page ---------------------------------------------- */
+
+.pied {
+  background: var(--bleu-nuit);
+  color: #b8c4cf;
+  font-size: 0.85rem;
+  padding: 1.2rem 0;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.pied a { color: #7fd4a6; }
+
+/* --- Écrans moyens et larges ------------------------------------ */
+
+@media (min-width: 640px) {
+  .champs { flex-direction: row; align-items: flex-end; }
+  .bouton-inverser { align-self: flex-end; margin-bottom: 0.15rem; }
+  .bouton-principal { width: auto; padding-inline: 2.4rem; }
+}
+
+@media (max-width: 400px) {
+  .tarif-direct { flex-direction: column; text-align: center; gap: 0.3rem; }
+}
