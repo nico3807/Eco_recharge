@@ -15,6 +15,8 @@
   var formulaire = document.getElementById('formulaire-trajet');
   var boutonCalculer = document.getElementById('bouton-calculer');
   var boutonInverser = document.getElementById('bouton-inverser');
+  var optionRecharge = document.getElementById('option-recharge');
+  var bornesMeta = document.getElementById('bornes-meta');
   var messageErreur = document.getElementById('message-erreur');
   var metaTarifs = document.getElementById('meta-tarifs');
 
@@ -110,13 +112,25 @@
 
   /* --- Calcul du trajet ---------------------------------------------------- */
 
-  function calculerTrajet(departId, arriveeId) {
+  function calculerTrajet(departId, arriveeId, avecRecharge) {
     if (modeLocal) {
       var resultat = MoteurEco.calculerTrajet(donneesLocales.reseau, donneesLocales.tarifs, departId, arriveeId, 5);
-      return resultat.erreur ? Promise.reject(new Error(resultat.erreur)) : Promise.resolve(resultat);
+      if (resultat.erreur) return Promise.reject(new Error(resultat.erreur));
+      if (!avecRecharge) return Promise.resolve(resultat);
+      // Charge les bornes une seule fois puis annote le résultat localement
+      var bornesPretes = donneesLocales.bornes
+        ? Promise.resolve(donneesLocales.bornes)
+        : chargerJson('data/bornes.json').then(function (bornes) {
+            donneesLocales.bornes = bornes;
+            return bornes;
+          });
+      return bornesPretes.then(function (bornes) {
+        return MoteurEco.attacherBornes(resultat, bornes);
+      });
     }
     return fetch('/api/trajet?depart=' + encodeURIComponent(departId) +
-                 '&arrivee=' + encodeURIComponent(arriveeId) + '&sorties=5')
+                 '&arrivee=' + encodeURIComponent(arriveeId) + '&sorties=5' +
+                 (avecRecharge ? '&recharge=1' : ''))
       .then(function (reponse) {
         return reponse.json().then(function (corps) {
           if (!reponse.ok || corps.erreur) throw new Error(corps.erreur || 'Erreur serveur');
@@ -139,7 +153,7 @@
     boutonCalculer.disabled = true;
     boutonCalculer.textContent = 'Calcul en cours…';
 
-    calculerTrajet(depart.id, arrivee.id)
+    calculerTrajet(depart.id, arrivee.id, optionRecharge.checked)
       .then(afficherResultat)
       .catch(function (erreur) { afficherErreur(erreur.message); })
       .finally(function () {
@@ -157,6 +171,7 @@
   /* --- Pop-up de résultat --------------------------------------------------- */
 
   function afficherResultat(resultat) {
+    metaBornesCourante = resultat.bornesMeta || null;
     popupTrajet.textContent = resultat.depart.nom + ' (' + resultat.depart.autoroute + ') → ' +
       resultat.arrivee.nom + ' (' + resultat.arrivee.autoroute + ') — environ ' +
       resultat.distanceKm + ' km';
@@ -232,6 +247,8 @@
     boutonFermer.focus();
   }
 
+  var metaBornesCourante = null;   // métadonnées bornes du dernier résultat affiché
+
   function afficherDetail(alternative) {
     detailTitre.textContent = 'Où sortir avec ' + alternative.sorties +
       (alternative.sorties > 1 ? ' sorties ' : ' sortie ') + '(' + formaterPrix(alternative.prix) + ')';
@@ -240,9 +257,47 @@
       var element = document.createElement('li');
       element.textContent = 'Sortie ' + (index + 1) + ' : ' + gare.nom + ' (' + gare.autoroute +
         ') — sortez puis reprenez aussitôt l’autoroute';
+      if (gare.bornes) element.appendChild(construireBornes(gare.bornes));
       detailListe.appendChild(element);
     });
+
+    if (metaBornesCourante) {
+      bornesMeta.textContent = '⚡ Bornes rapides (≥ ' + metaBornesCourante.puissanceMinKw +
+        ' kW) à moins de ' + Math.round(metaBornesCourante.rayonMetres / 100) / 10 +
+        ' km de la sortie — données du ' +
+        new Date(metaBornesCourante.derniereMiseAJour).toLocaleDateString('fr-FR') +
+        ' (' + metaBornesCourante.source + ').';
+      bornesMeta.hidden = false;
+    } else {
+      bornesMeta.hidden = true;
+    }
+
     detailSorties.hidden = false;
+  }
+
+  /** Liste des bornes de recharge rapide proches d'une gare de sortie. */
+  function construireBornes(bornes) {
+    var bloc = document.createElement('ul');
+    bloc.className = 'liste-bornes';
+    if (bornes.length === 0) {
+      var aucune = document.createElement('li');
+      aucune.className = 'borne borne-absente';
+      aucune.textContent = 'Aucune borne rapide à moins d’1 km de cette sortie';
+      bloc.appendChild(aucune);
+      return bloc;
+    }
+    bornes.forEach(function (borne) {
+      var element = document.createElement('li');
+      element.className = 'borne';
+      var texte = '⚡ ' + borne.nom;
+      if (borne.puissanceKw) texte += ' — ' + borne.puissanceKw + ' kW';
+      if (borne.distanceM !== null && borne.distanceM !== undefined) {
+        texte += ' — à ' + borne.distanceM + ' m';
+      }
+      element.textContent = texte;
+      bloc.appendChild(element);
+    });
+    return bloc;
   }
 
   function fermerPopup() {

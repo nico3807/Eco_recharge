@@ -11,7 +11,9 @@
  *   GET /api/gares                     Liste des gares de péage
  *   GET /api/autoroutes                Liste des autoroutes couvertes
  *   GET /api/tarifs                    Métadonnées de la grille tarifaire
- *   GET /api/trajet?depart=&arrivee=   Calcul du trajet (+ &sorties=1..5)
+ *   GET /api/bornes                    Bornes de recharge rapide par gare
+ *   GET /api/trajet?depart=&arrivee=   Calcul du trajet (+ &sorties=1..5,
+ *                                      &recharge=1 pour les bornes électriques)
  */
 'use strict';
 
@@ -97,6 +99,9 @@ function traiterApi(url, res) {
         tauxParKm: tarifs.tauxParKm
       });
 
+    case '/api/bornes':
+      return repondreJson(res, 200, chargerJson('bornes.json'));
+
     case '/api/trajet': {
       const depart = url.searchParams.get('depart');
       const arrivee = url.searchParams.get('arrivee');
@@ -105,6 +110,9 @@ function traiterApi(url, res) {
       }
       const maxSorties = Math.min(5, Math.max(1, parseInt(url.searchParams.get('sorties'), 10) || 5));
       const resultat = moteur.calculerTrajet(reseau, tarifs, depart, arrivee, maxSorties);
+      if (url.searchParams.get('recharge') === '1') {
+        moteur.attacherBornes(resultat, chargerJson('bornes.json'));
+      }
       return repondreJson(res, resultat.erreur ? 404 : 200, resultat);
     }
 

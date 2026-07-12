@@ -47,6 +47,14 @@
 
         <datalist id="liste-gares"></datalist>
 
+        <label class="option-recharge">
+          <input type="checkbox" id="option-recharge">
+          <span class="option-recharge-texte">
+            <strong>⚡ Avec recharge électrique</strong>
+            <small>Afficher les bornes de recharge rapide à moins d'1&nbsp;km des sorties proposées</small>
+          </span>
+        </label>
+
         <p id="message-erreur" class="message-erreur" role="alert" hidden></p>
 
         <button type="submit" class="bouton-principal" id="bouton-calculer">
@@ -87,6 +95,7 @@
       <div class="detail-sorties" id="detail-sorties" hidden>
         <h4 id="detail-titre"></h4>
         <ul id="detail-liste"></ul>
+        <p class="bornes-meta" id="bornes-meta" hidden></p>
       </div>
 
       <p class="popup-note" id="popup-note"></p>

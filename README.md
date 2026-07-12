@@ -11,6 +11,10 @@ les autoroutes françaises couvertes. Après validation, une **pop-up** affiche 
   sortant à des gares intermédiaires puis en reprenant aussitôt l'autoroute,
   avec l'économie réalisée et le détail des gares où sortir.
 
+Avec l'option **⚡ Avec recharge électrique**, le détail de chaque sortie
+proposée affiche en plus les **bornes de recharge rapide (≥ 50 kW) situées à
+moins d'1 km** de la gare de sortie : nom, opérateur, puissance et distance.
+
 ## Pourquoi sortir de l'autoroute peut coûter moins cher ?
 
 Le prix des péages n'est pas proportionnel à la distance : plus le trajet sans
@@ -39,7 +43,8 @@ Puis ouvrir <http://localhost:3000>.
 | GET | `/api/gares` | Liste des gares de péage (id, nom, autoroute) |
 | GET | `/api/autoroutes` | Autoroutes couvertes |
 | GET | `/api/tarifs` | Métadonnées de la grille tarifaire (date de mise à jour, taux) |
-| GET | `/api/trajet?depart=ID&arrivee=ID[&sorties=1..5]` | Calcul du trajet |
+| GET | `/api/bornes` | Bornes de recharge rapide par gare de péage |
+| GET | `/api/trajet?depart=ID&arrivee=ID[&sorties=1..5][&recharge=1]` | Calcul du trajet (`recharge=1` ajoute les bornes aux sorties proposées) |
 
 Exemple :
 
@@ -77,8 +82,28 @@ le JSON et d'actualiser la page, sans redémarrage.
 }
 ```
 
-Le réseau (gares, distances, jonctions) est décrit dans `data/reseau.json`
-et peut être enrichi de la même façon.
+Le réseau (gares, distances, jonctions, coordonnées GPS) est décrit dans
+`data/reseau.json` et peut être enrichi de la même façon.
+
+## Mise à jour des bornes de recharge électrique
+
+Les bornes vivent dans **`data/bornes.json`** (bornes rapides ≥ 50 kW à moins
+d'1 km de chaque gare de sortie), relu lui aussi à chaud par le serveur.
+Pour le régénérer à partir des **données réelles OSM** du portail
+[data.smartidf.services](https://data.smartidf.services/) (jeu de données
+« Stations de recharge pour véhicule électrique - France - données OSM ») :
+
+```bash
+node scripts/maj-bornes.js
+```
+
+Le script retrouve le jeu de données dans le catalogue, interroge l'API pour
+chaque gare (filtre géographique 1 km), garde les bornes rapides et écrit
+`data/bornes.json`. À lancer régulièrement (cron, GitHub Action…).
+
+> ⚠️ Le fichier `data/bornes.json` livré dans le dépôt contient des **données
+> d'exemple** (l'environnement de développement n'avait pas accès au portail) :
+> exécutez le script une fois pour les remplacer par les données réelles.
 
 ## Structure du projet
 
@@ -88,8 +113,10 @@ et peut être enrichi de la même façon.
 ├── js/app.js           Logique de l'interface (fetch API, pop-up, tags)
 ├── js/moteur.js        Moteur de calcul partagé serveur/navigateur
 │                       (graphe, Dijkstra, tarification, optimisation 1-5 sorties)
-├── data/reseau.json    Gares de péage et jonctions des autoroutes françaises
+├── data/reseau.json    Gares de péage (avec coordonnées GPS) et jonctions
 ├── data/tarifs.json    Grille tarifaire — mise à jour régulièrement
+├── data/bornes.json    Bornes de recharge rapide par gare — mise à jour régulièrement
+├── scripts/maj-bornes.js  Régénère data/bornes.json depuis data.smartidf.services
 └── server.js           Serveur web + API REST (Node.js sans dépendance)
 ```
 

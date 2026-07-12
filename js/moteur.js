@@ -239,6 +239,27 @@
     };
   }
 
+  /**
+   * Option « Avec recharge électrique » : annote chaque gare de sortie
+   * proposée avec les bornes de recharge rapide situées à moins de 1 km
+   * (données de data/bornes.json, issues du portail data.smartidf.services).
+   */
+  function attacherBornes(resultat, bornes) {
+    if (resultat.erreur || !bornes) return resultat;
+    resultat.alternatives.forEach(function (alternative) {
+      alternative.garesSortie.forEach(function (gare) {
+        gare.bornes = bornes.parGare[gare.id] || [];
+      });
+    });
+    resultat.bornesMeta = {
+      derniereMiseAJour: bornes.derniereMiseAJour,
+      rayonMetres: bornes.rayonMetres,
+      puissanceMinKw: bornes.puissanceMinKw,
+      source: bornes.source
+    };
+    return resultat;
+  }
+
   /** Liste plate de toutes les gares (pour l'autocomplétion et l'API). */
   function listerGares(reseau) {
     var liste = [];
@@ -260,6 +281,7 @@
     construireGraphe: construireGraphe,
     plusCourtChemin: plusCourtChemin,
     calculerTrajet: calculerTrajet,
+    attacherBornes: attacherBornes,
     listerGares: listerGares
   };
 

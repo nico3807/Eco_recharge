@@ -1,0 +1,143 @@
+{
+  "description": "Bornes de recharge électrique rapide (≥ 50 kW) à moins de 1000 m des gares de péage.",
+  "source": "DONNÉES D'EXEMPLE pour démonstration — régénérez ce fichier avec « node scripts/maj-bornes.js » pour obtenir les données réelles OSM du portail data.smartidf.services",
+  "derniereMiseAJour": "2026-07-12",
+  "rayonMetres": 1000,
+  "puissanceMinKw": 50,
+  "parGare": {
+    "a6-nemours": [
+      { "nom": "TotalEnergies Nemours", "operateur": "TotalEnergies", "puissanceKw": 175, "distanceM": 450 }
+    ],
+    "a6-auxerre-nord": [
+      { "nom": "Fastned Auxerre", "operateur": "Fastned", "puissanceKw": 300, "distanceM": 600 },
+      { "nom": "Tesla Supercharger Auxerre", "operateur": "Tesla", "puissanceKw": 250, "distanceM": 850 }
+    ],
+    "a6-avallon": [
+      { "nom": "Ionity Avallon", "operateur": "Ionity", "puissanceKw": 350, "distanceM": 700 }
+    ],
+    "a6-pouilly": [
+      { "nom": "Electra Pouilly-en-Auxois", "operateur": "Electra", "puissanceKw": 225, "distanceM": 300 }
+    ],
+    "a6-beaune": [
+      { "nom": "Tesla Supercharger Beaune", "operateur": "Tesla", "puissanceKw": 250, "distanceM": 550 },
+      { "nom": "Izivia Fast Beaune", "operateur": "Izivia", "puissanceKw": 150, "distanceM": 900 }
+    ],
+    "a6-chalon-sud": [
+      { "nom": "Allego Chalon Sud", "operateur": "Allego", "puissanceKw": 150, "distanceM": 400 }
+    ],
+    "a6-macon-sud": [
+      { "nom": "Tesla Supercharger Mâcon", "operateur": "Tesla", "puissanceKw": 250, "distanceM": 650 }
+    ],
+    "a6-belleville": [
+      { "nom": "Electra Belleville", "operateur": "Electra", "puissanceKw": 300, "distanceM": 500 }
+    ],
+    "a6-villefranche": [
+      { "nom": "TotalEnergies Villefranche", "operateur": "TotalEnergies", "puissanceKw": 175, "distanceM": 750 }
+    ],
+    "a7-vienne": [
+      { "nom": "Fastned Vienne Sud", "operateur": "Fastned", "puissanceKw": 300, "distanceM": 350 }
+    ],
+    "a7-chanas": [
+      { "nom": "Engie Vianeo Chanas", "operateur": "Engie Vianeo", "puissanceKw": 150, "distanceM": 600 }
+    ],
+    "a7-tain": [
+      { "nom": "Ionity Tain-l'Hermitage", "operateur": "Ionity", "puissanceKw": 350, "distanceM": 800 }
+    ],
+    "a7-valence-sud": [
+      { "nom": "Tesla Supercharger Valence", "operateur": "Tesla", "puissanceKw": 250, "distanceM": 400 },
+      { "nom": "Electra Valence Sud", "operateur": "Electra", "puissanceKw": 225, "distanceM": 950 }
+    ],
+    "a7-montelimar-nord": [
+      { "nom": "TotalEnergies Montélimar", "operateur": "TotalEnergies", "puissanceKw": 175, "distanceM": 550 }
+    ],
+    "a7-montelimar-sud": [
+      { "nom": "Fastned Montélimar Sud", "operateur": "Fastned", "puissanceKw": 300, "distanceM": 700 }
+    ],
+    "a7-orange": [
+      { "nom": "Ionity Orange Centre", "operateur": "Ionity", "puissanceKw": 350, "distanceM": 450 }
+    ],
+    "a7-avignon-nord": [
+      { "nom": "Tesla Supercharger Avignon", "operateur": "Tesla", "puissanceKw": 250, "distanceM": 600 },
+      { "nom": "Izivia Fast Avignon Nord", "operateur": "Izivia", "puissanceKw": 150, "distanceM": 850 }
+    ],
+    "a7-salon": [
+      { "nom": "Electra Salon-de-Provence", "operateur": "Electra", "puissanceKw": 300, "distanceM": 500 }
+    ],
+    "a8-aix-ouest": [
+      { "nom": "Tesla Supercharger Aix Ouest", "operateur": "Tesla", "puissanceKw": 250, "distanceM": 350 }
+    ],
+    "a8-brignoles": [
+      { "nom": "Engie Vianeo Brignoles", "operateur": "Engie Vianeo", "puissanceKw": 150, "distanceM": 750 }
+    ],
+    "a8-le-muy": [
+      { "nom": "Ionity Le Muy", "operateur": "Ionity", "puissanceKw": 350, "distanceM": 600 }
+    ],
+    "a8-antibes": [
+      { "nom": "Fastned Antibes", "operateur": "Fastned", "puissanceKw": 300, "distanceM": 900 }
+    ],
+    "a9-nimes-ouest": [
+      { "nom": "Tesla Supercharger Nîmes", "operateur": "Tesla", "puissanceKw": 250, "distanceM": 500 }
+    ],
+    "a9-montpellier-ouest": [
+      { "nom": "Electra Saint-Jean-de-Védas", "operateur": "Electra", "puissanceKw": 225, "distanceM": 400 },
+      { "nom": "Allego Montpellier Ouest", "operateur": "Allego", "puissanceKw": 150, "distanceM": 950 }
+    ],
+    "a9-beziers-est": [
+      { "nom": "Ionity Béziers", "operateur": "Ionity", "puissanceKw": 350, "distanceM": 650 }
+    ],
+    "a9-narbonne-sud": [
+      { "nom": "TotalEnergies Narbonne Sud", "operateur": "TotalEnergies", "puissanceKw": 175, "distanceM": 550 }
+    ],
+    "a9-perpignan-nord": [
+      { "nom": "Fastned Perpignan Nord", "operateur": "Fastned", "puissanceKw": 300, "distanceM": 450 }
+    ],
+    "a10-blois": [
+      { "nom": "Tesla Supercharger Blois", "operateur": "Tesla", "puissanceKw": 250, "distanceM": 700 }
+    ],
+    "a10-tours-nord": [
+      { "nom": "Ionity Tours Nord", "operateur": "Ionity", "puissanceKw": 350, "distanceM": 500 }
+    ],
+    "a10-poitiers-nord": [
+      { "nom": "Electra Poitiers Nord", "operateur": "Electra", "puissanceKw": 300, "distanceM": 350 }
+    ],
+    "a10-poitiers-sud": [
+      { "nom": "TotalEnergies Poitiers Sud", "operateur": "TotalEnergies", "puissanceKw": 175, "distanceM": 800 }
+    ],
+    "a10-niort": [
+      { "nom": "Fastned Niort", "operateur": "Fastned", "puissanceKw": 300, "distanceM": 600 }
+    ],
+    "a10-saintes": [
+      { "nom": "Izivia Fast Saintes", "operateur": "Izivia", "puissanceKw": 150, "distanceM": 450 }
+    ],
+    "a11-le-mans-nord": [
+      { "nom": "Tesla Supercharger Le Mans", "operateur": "Tesla", "puissanceKw": 250, "distanceM": 550 }
+    ],
+    "a11-angers": [
+      { "nom": "Electra Angers", "operateur": "Electra", "puissanceKw": 225, "distanceM": 400 }
+    ],
+    "a61-carcassonne-est": [
+      { "nom": "Ionity Carcassonne", "operateur": "Ionity", "puissanceKw": 350, "distanceM": 700 }
+    ],
+    "a61-castelnaudary": [
+      { "nom": "Engie Vianeo Castelnaudary", "operateur": "Engie Vianeo", "puissanceKw": 150, "distanceM": 850 }
+    ],
+    "a62-montauban": [
+      { "nom": "Fastned Montauban", "operateur": "Fastned", "puissanceKw": 300, "distanceM": 500 }
+    ],
+    "a62-agen": [
+      { "nom": "Tesla Supercharger Agen", "operateur": "Tesla", "puissanceKw": 250, "distanceM": 650 }
+    ],
+    "a62-langon": [
+      { "nom": "TotalEnergies Langon", "operateur": "TotalEnergies", "puissanceKw": 175, "distanceM": 400 }
+    ],
+    "a71-vierzon": [
+      { "nom": "Ionity Vierzon", "operateur": "Ionity", "puissanceKw": 350, "distanceM": 550 }
+    ],
+    "a71-bourges": [
+      { "nom": "Electra Bourges", "operateur": "Electra", "puissanceKw": 300, "distanceM": 700 }
+    ],
+    "a71-riom": [
+      { "nom": "Allego Riom", "operateur": "Allego", "puissanceKw": 150, "distanceM": 600 }
+    ]
+  }
+}
