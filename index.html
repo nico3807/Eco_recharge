@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Calculez le trajet autoroutier le moins cher entre deux gares de péage françaises, avec ou sans sorties intermédiaires.">
+  <title>Éco-Péage — Trajets autoroutiers au meilleur prix</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;🛣️&lt;/text&gt;&lt;/svg&gt;">
+</head>
+<body>
+
+  <header class="entete">
+    <div class="conteneur">
+      <h1><span aria-hidden="true">🛣️</span> Éco-Péage</h1>
+      <p class="sous-titre">Payez moins cher vos trajets sur les autoroutes françaises</p>
+    </div>
+  </header>
+
+  <main class="conteneur">
+
+    <section class="carte carte-formulaire" aria-labelledby="titre-formulaire">
+      <h2 id="titre-formulaire">Votre trajet</h2>
+      <p class="explication">
+        Choisissez votre gare de péage d'entrée et de sortie&nbsp;: nous comparons le tarif
+        sans sortie avec les meilleurs découpages en 1 à 5&nbsp;sorties intermédiaires
+        (sortie puis retour immédiat sur l'autoroute).
+      </p>
+
+      <form id="formulaire-trajet" autocomplete="off">
+        <div class="champs">
+          <div class="champ">
+            <label for="gare-depart">Gare de péage d'entrée</label>
+            <input type="text" id="gare-depart" list="liste-gares"
+                   placeholder="Ex. : Fleury-en-Bière (A6)" required>
+          </div>
+
+          <button type="button" id="bouton-inverser" class="bouton-inverser"
+                  title="Inverser départ et arrivée" aria-label="Inverser départ et arrivée">⇅</button>
+
+          <div class="champ">
+            <label for="gare-arrivee">Gare de péage de sortie</label>
+            <input type="text" id="gare-arrivee" list="liste-gares"
+                   placeholder="Ex. : Marseille (A7)" required>
+          </div>
+        </div>
+
+        <datalist id="liste-gares"></datalist>
+
+        <label class="option-recharge">
+          <input type="checkbox" id="option-recharge">
+          <span class="option-recharge-texte">
+            <strong>⚡ Avec recharge électrique</strong>
+            <small>Afficher les bornes de recharge rapide à moins d'1&nbsp;km des sorties proposées</small>
+          </span>
+        </label>
+
+        <p id="message-erreur" class="message-erreur" role="alert" hidden></p>
+
+        <button type="submit" class="bouton-principal" id="bouton-calculer">
+          Calculer le meilleur tarif
+        </button>
+      </form>
+    </section>
+
+    <section class="carte carte-infos">
+      <h2>Comment ça marche&nbsp;?</h2>
+      <ol class="etapes">
+        <li><strong>Tarif direct</strong> — le prix du péage si vous restez sur l'autoroute de bout en bout.</li>
+        <li><strong>Sorties malines</strong> — le prix au kilomètre augmente avec la longueur du trajet sans sortie&nbsp;:
+            sortir à une gare intermédiaire puis reprendre aussitôt l'autoroute peut coûter moins cher.</li>
+        <li><strong>Comparaison</strong> — nous affichons le meilleur découpage possible avec 1, 2, 3, 4 ou 5 sorties.</li>
+      </ol>
+      <p class="meta-tarifs" id="meta-tarifs">Tarifs classe 1 — chargement…</p>
+    </section>
+
+  </main>
+
+  <!-- Pop-up de résultat -->
+  <div class="voile" id="voile-popup" hidden>
+    <div class="popup" role="dialog" aria-modal="true" aria-labelledby="titre-popup">
+      <button class="bouton-fermer" id="bouton-fermer" aria-label="Fermer la fenêtre">×</button>
+
+      <h2 id="titre-popup">Résultat du trajet</h2>
+      <p class="popup-trajet" id="popup-trajet"></p>
+
+      <div class="tarif-direct" id="tarif-direct">
+        <span class="tarif-direct-libelle">Tarif sans sortie d'autoroute</span>
+        <span class="tarif-direct-prix" id="prix-direct">—</span>
+      </div>
+
+      <h3 class="titre-tags">Le moins cher avec des sorties intermédiaires</h3>
+      <div class="tags" id="tags-sorties" aria-live="polite"></div>
+
+      <div class="detail-sorties" id="detail-sorties" hidden>
+        <h4 id="detail-titre"></h4>
+        <ul id="detail-liste"></ul>
+        <p class="bornes-meta" id="bornes-meta" hidden></p>
+      </div>
+
+      <p class="popup-note" id="popup-note"></p>
+    </div>
+  </div>
+
+  <footer class="pied">
+    <div class="conteneur">
+      <p>Éco-Péage — démonstrateur pédagogique inspiré du principe d'<a href="https://autoroute-eco.fr/" target="_blank" rel="noopener">autoroute-eco.fr</a>.
+         Tarifs indicatifs, vérifiez auprès des sociétés d'autoroutes.</p>
+    </div>
+  </footer>
+
+  <script src="js/moteur.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

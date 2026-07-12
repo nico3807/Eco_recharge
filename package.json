@@ -1,0 +1,10 @@
+{
+  "name": "eco-peage",
+  "version": "1.0.0",
+  "description": "Calculateur de trajets autoroutiers les moins chers (péages français)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "MIT"
+}
