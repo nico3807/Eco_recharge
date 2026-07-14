@@ -84,6 +84,15 @@
       <h2 id="titre-popup">Résultat du trajet</h2>
       <p class="popup-trajet" id="popup-trajet"></p>
 
+      <div class="choix-parcours" id="choix-parcours" hidden>
+        <h3>⚠️ Choisissez votre parcours</h3>
+        <p class="choix-parcours-note">L'itinéraire le plus court comprend une portion hors autoroute.
+           Sélectionnez le parcours qui vous convient :</p>
+        <div id="liste-parcours" role="radiogroup" aria-label="Choix du parcours"></div>
+      </div>
+
+      <p class="info-hors-autoroute" id="info-hors-autoroute" hidden></p>
+
       <div class="tarif-direct" id="tarif-direct">
         <span class="tarif-direct-libelle">Tarif sans sortie d'autoroute</span>
         <span class="tarif-direct-prix" id="prix-direct">—</span>

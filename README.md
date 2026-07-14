@@ -15,12 +15,23 @@ Avec l'option **⚡ Avec recharge électrique**, le détail de chaque sortie
 proposée affiche en plus les **bornes de recharge rapide (≥ 50 kW) situées à
 moins d'1 km** de la gare de sortie : nom, opérateur, puissance et distance.
 
+Si l'itinéraire le plus court comprend une **portion hors autoroute**
+(traversée de Lyon, rocade de Bordeaux, Francilienne…), la pop-up propose
+d'abord le **choix du parcours** : chaque option indique la distance, le tarif
+direct et les portions hors autoroute (ou « intégralement sur autoroute »), et
+les tarifs se recalculent selon le parcours choisi.
+
 ## Pourquoi sortir de l'autoroute peut coûter moins cher ?
 
-Le prix des péages n'est pas proportionnel à la distance : plus le trajet sans
-sortie est long, plus le prix au kilomètre augmente. En sortant à une gare
-intermédiaire puis en rentrant aussitôt, le « compteur » repart de zéro — le
-total des tronçons peut alors être inférieur au tarif direct.
+Les grilles de péage favorisent les trajets courts (tarif au kilomètre plus
+bas, pensé pour les riverains) : rester sur l'autoroute de bout en bout coûte
+donc plus cher au kilomètre. En sortant à une gare intermédiaire puis en
+rentrant aussitôt, le « compteur » repart de zéro — le total des tronçons est
+alors inférieur au tarif direct, avec des **économies de l'ordre de 5 à 25 %**
+selon les trajets (cf. [autoroute-eco.fr](https://autoroute-eco.fr/) :
+Paris→Marseille ≈ 58 € direct contre ≈ 51 € en fractionnant). Les taux et le
+coefficient de la grille `data/tarifs.json` sont calibrés sur ces ordres de
+grandeur réels.
 
 ## Démarrage
 
@@ -52,19 +63,35 @@ Exemple :
 curl "http://localhost:3000/api/trajet?depart=a6-fleury&arrivee=a7-marseille"
 ```
 
-Réponse (extrait) :
+Réponse (extrait) — un ou plusieurs `parcours` sont renvoyés ; il y en a
+plusieurs quand l'itinéraire le plus court comprend une portion hors
+autoroute, pour laisser le choix à l'utilisateur :
 
 ```json
 {
   "depart":   { "id": "a6-fleury", "nom": "Fleury-en-Bière", "autoroute": "A6" },
   "arrivee":  { "id": "a7-marseille", "nom": "Marseille (Saint-Charles)", "autoroute": "A7" },
-  "distanceKm": 735,
-  "direct":   { "sorties": 0, "prix": 158.4 },
-  "alternatives": [
-    { "sorties": 1, "prix": 128.3, "economie": 30.1, "garesSortie": [ ... ] },
-    { "sorties": 2, "prix": 118.6, "economie": 39.8, "garesSortie": [ ... ] }
-  ],
-  "meilleurPrix": { "sorties": 5, "prix": 112.4 }
+  "parcours": [
+    {
+      "description": "par A6, A7",
+      "distanceKm": 760,
+      "kmPayants": 735,
+      "kmHorsAutoroute": 25,
+      "portionsHorsAutoroute": [ { "via": "Traversée de Lyon (M6/M7)", "km": 25 } ],
+      "direct": { "sorties": 0, "prix": 68.3 },
+      "alternatives": [
+        { "sorties": 1, "prix": 63.9, "economie": 4.4, "garesSortie": [ ... ] }
+      ],
+      "meilleurPrix": { "sorties": 5, "prix": 61.2 }
+    },
+    {
+      "description": "par A6, A7",
+      "distanceKm": 765,
+      "kmHorsAutoroute": 0,
+      "direct": { "sorties": 0, "prix": 65.1 },
+      "meilleurPrix": { "sorties": 5, "prix": 58.6 }
+    }
+  ]
 }
 ```
 

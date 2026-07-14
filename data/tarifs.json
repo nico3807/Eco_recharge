@@ -1,22 +1,23 @@
 {
   "description": "Grille tarifaire des péages (véhicule classe 1). Fichier mis à jour régulièrement : il est relu automatiquement par l'API à chaque modification, sans redémarrage du serveur.",
-  "derniereMiseAJour": "2026-07-01",
+  "calibration": "Taux et coefficient calibrés sur les tarifs réels 2026 (ex. Paris→Marseille ≈ 58-67 € en direct, économie de l'ordre de 10-15 % en fractionnant, cf. autoroute-eco.fr). Le coefficientDistance modélise le surcoût des longs trajets sans sortie : les trajets courts sont favorisés par les concessionnaires, d'où l'intérêt de fractionner.",
+  "derniereMiseAJour": "2026-07-14",
   "classeVehicule": 1,
   "arrondi": 0.1,
-  "coefficientDistance": 0.0012,
+  "coefficientDistance": 0.0002,
   "tauxParKm": {
-    "A4": 0.113,
-    "A6": 0.117,
-    "A7": 0.112,
-    "A8": 0.121,
-    "A9": 0.114,
-    "A10": 0.118,
-    "A11": 0.116,
-    "A13": 0.11,
-    "A43": 0.124,
-    "A61": 0.109,
-    "A62": 0.111,
-    "A63": 0.106,
-    "A71": 0.115
+    "A4": 0.075,
+    "A6": 0.08,
+    "A7": 0.082,
+    "A8": 0.095,
+    "A9": 0.082,
+    "A10": 0.095,
+    "A11": 0.082,
+    "A13": 0.082,
+    "A43": 0.105,
+    "A61": 0.1,
+    "A62": 0.078,
+    "A63": 0.068,
+    "A71": 0.083
   }
 }

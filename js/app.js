@@ -16,23 +16,28 @@
   var boutonCalculer = document.getElementById('bouton-calculer');
   var boutonInverser = document.getElementById('bouton-inverser');
   var optionRecharge = document.getElementById('option-recharge');
-  var bornesMeta = document.getElementById('bornes-meta');
   var messageErreur = document.getElementById('message-erreur');
   var metaTarifs = document.getElementById('meta-tarifs');
 
   var voile = document.getElementById('voile-popup');
   var boutonFermer = document.getElementById('bouton-fermer');
   var popupTrajet = document.getElementById('popup-trajet');
+  var choixParcours = document.getElementById('choix-parcours');
+  var listeParcours = document.getElementById('liste-parcours');
+  var infoHorsAutoroute = document.getElementById('info-hors-autoroute');
   var prixDirect = document.getElementById('prix-direct');
   var tagsSorties = document.getElementById('tags-sorties');
   var detailSorties = document.getElementById('detail-sorties');
   var detailTitre = document.getElementById('detail-titre');
   var detailListe = document.getElementById('detail-liste');
+  var bornesMeta = document.getElementById('bornes-meta');
   var popupNote = document.getElementById('popup-note');
 
   var gares = [];
   var modeLocal = false;   // true si l'API est indisponible (calcul navigateur)
   var donneesLocales = null;
+  var resultatCourant = null;      // dernier résultat affiché dans la pop-up
+  var metaBornesCourante = null;   // métadonnées bornes du dernier résultat
 
   /* --- Utilitaires ------------------------------------------------------- */
 
@@ -171,30 +176,103 @@
   /* --- Pop-up de résultat --------------------------------------------------- */
 
   function afficherResultat(resultat) {
+    resultatCourant = resultat;
     metaBornesCourante = resultat.bornesMeta || null;
+
+    // Choix du parcours : proposé quand l'itinéraire le plus court comprend
+    // une portion hors autoroute et qu'il existe des alternatives
+    if (resultat.parcours.length > 1) {
+      listeParcours.innerHTML = '';
+      resultat.parcours.forEach(function (parcours, index) {
+        listeParcours.appendChild(construireChoixParcours(parcours, index));
+      });
+      choixParcours.hidden = false;
+    } else {
+      choixParcours.hidden = true;
+    }
+
+    afficherParcours(0);
+
+    voile.hidden = false;
+    document.body.style.overflow = 'hidden';
+    boutonFermer.focus();
+  }
+
+  /** Une option (bouton radio) du choix de parcours. */
+  function construireChoixParcours(parcours, index) {
+    var etiquette = document.createElement('label');
+    etiquette.className = 'parcours';
+
+    var radio = document.createElement('input');
+    radio.type = 'radio';
+    radio.name = 'parcours';
+    radio.value = String(index);
+    radio.checked = index === 0;
+    radio.addEventListener('change', function () {
+      if (radio.checked) afficherParcours(index);
+    });
+
+    var texte = document.createElement('span');
+    texte.className = 'parcours-texte';
+
+    var titre = document.createElement('strong');
+    titre.textContent = 'Parcours ' + (index + 1) + ' — ' + parcours.description +
+      ' · ' + parcours.distanceKm + ' km · direct ' + formaterPrix(parcours.direct.prix);
+    texte.appendChild(titre);
+
+    var detail = document.createElement('small');
+    if (parcours.portionsHorsAutoroute.length > 0) {
+      detail.className = 'parcours-hors-autoroute';
+      detail.textContent = '⚠ ' + parcours.kmHorsAutoroute + ' km hors autoroute : ' +
+        parcours.portionsHorsAutoroute.map(function (portion) { return portion.via; }).join(', ');
+    } else {
+      detail.className = 'parcours-tout-autoroute';
+      detail.textContent = '✓ Intégralement sur autoroute';
+    }
+    texte.appendChild(detail);
+
+    etiquette.appendChild(radio);
+    etiquette.appendChild(texte);
+    return etiquette;
+  }
+
+  /** Affiche les tarifs (direct + tags 1-5 sorties) du parcours sélectionné. */
+  function afficherParcours(index) {
+    var resultat = resultatCourant;
+    var parcours = resultat.parcours[index];
+
     popupTrajet.textContent = resultat.depart.nom + ' (' + resultat.depart.autoroute + ') → ' +
       resultat.arrivee.nom + ' (' + resultat.arrivee.autoroute + ') — environ ' +
-      resultat.distanceKm + ' km';
+      parcours.distanceKm + ' km, ' + parcours.description;
 
-    prixDirect.textContent = formaterPrix(resultat.direct.prix);
+    if (parcours.portionsHorsAutoroute.length > 0) {
+      infoHorsAutoroute.textContent = '⚠ Ce parcours comprend ' + parcours.kmHorsAutoroute +
+        ' km hors autoroute : ' +
+        parcours.portionsHorsAutoroute.map(function (portion) { return portion.via; }).join(', ') + '.';
+      infoHorsAutoroute.hidden = false;
+    } else {
+      infoHorsAutoroute.hidden = true;
+    }
+
+    prixDirect.textContent = formaterPrix(parcours.direct.prix);
 
     tagsSorties.innerHTML = '';
     detailSorties.hidden = true;
 
-    if (resultat.alternatives.length === 0) {
+    if (parcours.alternatives.length === 0) {
       var vide = document.createElement('p');
       vide.textContent = 'Pas de gare intermédiaire sur ce trajet : le tarif direct est le seul possible.';
       vide.className = 'popup-trajet';
       tagsSorties.appendChild(vide);
     }
 
-    resultat.alternatives.forEach(function (alternative) {
+    parcours.alternatives.forEach(function (alternative) {
       var tag = document.createElement('button');
       tag.type = 'button';
       tag.className = 'tag';
 
-      var estMeilleur = resultat.meilleurPrix.sorties === alternative.sorties &&
-                        alternative.prix < resultat.direct.prix;
+      var estMeilleur = parcours.meilleurPrix.sorties === alternative.sorties &&
+                        alternative.prix < parcours.direct.prix;
       if (estMeilleur) tag.classList.add('tag-meilleur');
       if (alternative.economie <= 0) tag.classList.add('tag-sans-gain');
 
@@ -222,8 +300,8 @@
       tagsSorties.appendChild(tag);
     });
 
-    var meilleure = resultat.alternatives.find(function (a) {
-      return a.sorties === resultat.meilleurPrix.sorties;
+    var meilleure = parcours.alternatives.find(function (a) {
+      return a.sorties === parcours.meilleurPrix.sorties;
     });
     if (meilleure && meilleure.economie > 0) {
       popupNote.textContent = 'Meilleur plan : ' + meilleure.sorties +
@@ -232,7 +310,7 @@
         'Cliquez sur un tag pour voir où sortir. Tarifs du ' +
         new Date(resultat.tarifs.derniereMiseAJour).toLocaleDateString('fr-FR') + '.';
       afficherDetail(meilleure);
-      var indexMeilleure = resultat.alternatives.indexOf(meilleure);
+      var indexMeilleure = parcours.alternatives.indexOf(meilleure);
       if (tagsSorties.children[indexMeilleure]) {
         tagsSorties.children[indexMeilleure].classList.add('tag-actif');
       }
@@ -241,13 +319,7 @@
         'le tarif direct est déjà le moins cher. Tarifs du ' +
         new Date(resultat.tarifs.derniereMiseAJour).toLocaleDateString('fr-FR') + '.';
     }
-
-    voile.hidden = false;
-    document.body.style.overflow = 'hidden';
-    boutonFermer.focus();
   }
-
-  var metaBornesCourante = null;   // métadonnées bornes du dernier résultat affiché
 
   function afficherDetail(alternative) {
     detailTitre.textContent = 'Où sortir avec ' + alternative.sorties +
