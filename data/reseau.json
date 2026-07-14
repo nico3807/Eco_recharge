@@ -1106,87 +1106,128 @@
     {
       "de": "a6-lyon-limonest",
       "a": "a7-lyon-sud",
-      "via": "Traversée de Lyon (gratuit)"
+      "via": "Traversée de Lyon (M6/M7)",
+      "km": 25,
+      "horsAutoroute": true
+    },
+    {
+      "de": "a6-lyon-limonest",
+      "a": "a7-vienne",
+      "via": "Contournement Est de Lyon (A46, gratuit)",
+      "km": 60,
+      "horsAutoroute": false
     },
     {
       "de": "a6-lyon-limonest",
       "a": "a43-isle-abeau",
-      "via": "Rocade Est de Lyon (gratuit)"
+      "via": "Rocade Est de Lyon (A46/A43, gratuit)",
+      "km": 50,
+      "horsAutoroute": false
     },
     {
       "de": "a7-lyon-sud",
       "a": "a43-isle-abeau",
-      "via": "Rocade Est de Lyon (gratuit)"
+      "via": "A46 Sud / A43 (gratuit)",
+      "km": 40,
+      "horsAutoroute": false
     },
     {
       "de": "a7-orange",
       "a": "a9-roquemaure",
-      "via": "Bifurcation A7/A9 Orange"
+      "via": "Bifurcation A7/A9 Orange",
+      "km": 12,
+      "horsAutoroute": false
     },
     {
       "de": "a7-lancon",
       "a": "a8-coudoux",
-      "via": "Bifurcation A7/A8 Coudoux"
+      "via": "Bifurcation A7/A8 Coudoux",
+      "km": 8,
+      "horsAutoroute": false
     },
     {
       "de": "a9-narbonne-est",
       "a": "a61-lezignan",
-      "via": "Bifurcation A9/A61 Narbonne"
+      "via": "Bifurcation A9/A61 Narbonne",
+      "km": 10,
+      "horsAutoroute": false
     },
     {
       "de": "a61-toulouse",
       "a": "a62-montauban",
-      "via": "Périphérique de Toulouse (gratuit)"
+      "via": "Périphérique de Toulouse (hors autoroute)",
+      "km": 55,
+      "horsAutoroute": true
     },
     {
       "de": "a62-la-brede",
       "a": "a10-bordeaux",
-      "via": "Rocade de Bordeaux (gratuit)"
+      "via": "Rocade de Bordeaux (hors autoroute)",
+      "km": 35,
+      "horsAutoroute": true
     },
     {
       "de": "a62-la-brede",
       "a": "a63-saugnacq",
-      "via": "Rocade de Bordeaux (gratuit)"
+      "via": "Rocade de Bordeaux (hors autoroute)",
+      "km": 50,
+      "horsAutoroute": true
     },
     {
       "de": "a10-bordeaux",
       "a": "a63-saugnacq",
-      "via": "Rocade de Bordeaux (gratuit)"
+      "via": "Rocade de Bordeaux (hors autoroute)",
+      "km": 55,
+      "horsAutoroute": true
     },
     {
       "de": "a10-saint-arnoult",
       "a": "a11-ablis",
-      "via": "Bifurcation A10/A11 Ablis"
+      "via": "Bifurcation A10/A11 Ablis",
+      "km": 12,
+      "horsAutoroute": false
     },
     {
       "de": "a10-orleans-nord",
       "a": "a71-olivet",
-      "via": "Tangentielle d'Orléans (gratuit)"
+      "via": "Tangentielle d’Orléans (hors autoroute)",
+      "km": 15,
+      "horsAutoroute": true
     },
     {
       "de": "a10-saint-arnoult",
       "a": "a6-fleury",
-      "via": "Francilienne (gratuit)"
+      "via": "Francilienne N104 (hors autoroute)",
+      "km": 55,
+      "horsAutoroute": true
     },
     {
       "de": "a10-saint-arnoult",
       "a": "a13-buchelay",
-      "via": "Francilienne (gratuit)"
+      "via": "Francilienne N104 (hors autoroute)",
+      "km": 60,
+      "horsAutoroute": true
     },
     {
       "de": "a10-saint-arnoult",
       "a": "a4-coutevroult",
-      "via": "Francilienne (gratuit)"
+      "via": "Francilienne N104 (hors autoroute)",
+      "km": 95,
+      "horsAutoroute": true
     },
     {
       "de": "a6-fleury",
       "a": "a4-coutevroult",
-      "via": "Francilienne (gratuit)"
+      "via": "Francilienne N104 (hors autoroute)",
+      "km": 75,
+      "horsAutoroute": true
     },
     {
       "de": "a6-fleury",
       "a": "a13-buchelay",
-      "via": "Francilienne (gratuit)"
+      "via": "Francilienne N104 (hors autoroute)",
+      "km": 95,
+      "horsAutoroute": true
     }
   ]
 }

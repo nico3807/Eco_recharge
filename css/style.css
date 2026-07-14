@@ -232,6 +232,70 @@ body {
 
 .bouton-fermer:hover { color: var(--rouge); }
 
+/* --- Choix du parcours (portions hors autoroute) --------------- */
+
+.choix-parcours {
+  background: #fff7e8;
+  border: 1.5px solid #f0c675;
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+  margin-bottom: 1.1rem;
+}
+
+.choix-parcours h3 { margin: 0 0 0.35rem; font-size: 1rem; }
+
+.choix-parcours-note {
+  margin: 0 0 0.7rem;
+  font-size: 0.88rem;
+  color: var(--gris-texte);
+}
+
+.parcours {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  background: #fff;
+  border: 1.5px solid var(--gris-bordure);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.parcours:hover { border-color: var(--vert); }
+
+.parcours:has(input:checked) {
+  border-color: var(--vert);
+  background: var(--vert-clair);
+}
+
+.parcours input {
+  margin-top: 0.25rem;
+  accent-color: var(--vert);
+  flex-shrink: 0;
+}
+
+.parcours-texte {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.9rem;
+}
+
+.parcours-hors-autoroute { color: #a3690b; }
+
+.parcours-tout-autoroute { color: var(--vert); }
+
+.info-hors-autoroute {
+  margin: 0 0 1rem;
+  font-size: 0.88rem;
+  color: #a3690b;
+  background: #fff7e8;
+  border-radius: 8px;
+  padding: 0.55rem 0.85rem;
+}
+
 .tarif-direct {
   display: flex;
   justify-content: space-between;
