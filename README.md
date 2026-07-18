@@ -26,7 +26,8 @@ pop-up sur fond **OpenStreetMap** (bibliothèque Leaflet embarquée dans
 départ, arrivée, gares traversées et sorties conseillées — avec leurs bornes
 de recharge au clic quand l'option ⚡ est active.
 
-Le bouton **🚗 Dans Waze** envoie la solution vers l'application **Waze** :
+Dans la pop-up carte, le bouton **🚗 Dans Waze** envoie la solution affichée
+vers l'application **Waze** :
 un panneau liste le trajet en étapes ordonnées (entrée d'autoroute, chaque
 sortie conseillée avec ses bornes, arrivée), chacune avec son lien de
 navigation `waze.com/ul` qui ouvre l'appli et démarre le guidage sur mobile.

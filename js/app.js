@@ -42,8 +42,7 @@
 
   var voileWaze = document.getElementById('voile-waze');
   var boutonFermerWaze = document.getElementById('bouton-fermer-waze');
-  var boutonWazeDirect = document.getElementById('bouton-waze-direct');
-  var boutonWazeDetail = document.getElementById('bouton-waze-detail');
+  var boutonWazeCarte = document.getElementById('bouton-waze-carte');
   var wazeSousTitre = document.getElementById('waze-sous-titre');
   var wazeEtapes = document.getElementById('waze-etapes');
 
@@ -55,6 +54,7 @@
   var indexParcoursCourant = 0;    // parcours sélectionné dans la pop-up
   var alternativeCourante = null;  // solution (1-5 sorties) affichée en détail
   var carteLeaflet = null;         // instance Leaflet de la pop-up carte
+  var solutionCarte = null;        // { parcours, alternative } affichée sur la carte
 
   /* --- Utilitaires ------------------------------------------------------- */
 
@@ -409,6 +409,7 @@
    */
   function ouvrirCarte(parcours, alternative) {
     var resultat = resultatCourant;
+    solutionCarte = { parcours: parcours, alternative: alternative };
 
     titreCarte.textContent = alternative
       ? 'Solution ' + alternative.sorties + (alternative.sorties > 1 ? ' sorties' : ' sortie') +
@@ -553,11 +554,8 @@
     document.body.style.overflow = voile.hidden ? '' : 'hidden';
   }
 
-  boutonWazeDirect.addEventListener('click', function () {
-    ouvrirWaze(resultatCourant.parcours[indexParcoursCourant], null);
-  });
-  boutonWazeDetail.addEventListener('click', function () {
-    ouvrirWaze(resultatCourant.parcours[indexParcoursCourant], alternativeCourante);
+  boutonWazeCarte.addEventListener('click', function () {
+    ouvrirWaze(solutionCarte.parcours, solutionCarte.alternative);
   });
   boutonFermerWaze.addEventListener('click', fermerWaze);
   voileWaze.addEventListener('click', function (evenement) {

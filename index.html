@@ -98,10 +98,7 @@
       <div class="tarif-direct" id="tarif-direct">
         <span class="tarif-direct-libelle">Tarif sans sortie d'autoroute</span>
         <span class="tarif-direct-prix" id="prix-direct">—</span>
-        <span class="boutons-solution">
-          <button type="button" class="bouton-carte" id="bouton-carte-direct">🗺 Afficher sur la carte</button>
-          <button type="button" class="bouton-carte bouton-waze" id="bouton-waze-direct">🚗 Dans Waze</button>
-        </span>
+        <button type="button" class="bouton-carte" id="bouton-carte-direct">🗺 Afficher sur la carte</button>
       </div>
 
       <h3 class="titre-tags">Le moins cher avec des sorties intermédiaires</h3>
@@ -109,10 +106,7 @@
 
       <div class="detail-sorties" id="detail-sorties" hidden>
         <h4 id="detail-titre"></h4>
-        <span class="boutons-solution">
-          <button type="button" class="bouton-carte bouton-carte-detail" id="bouton-carte-detail">🗺 Afficher sur la carte</button>
-          <button type="button" class="bouton-carte bouton-carte-detail bouton-waze" id="bouton-waze-detail">🚗 Dans Waze</button>
-        </span>
+        <button type="button" class="bouton-carte bouton-carte-detail" id="bouton-carte-detail">🗺 Afficher sur la carte</button>
         <ul id="detail-liste"></ul>
         <p class="bornes-meta" id="bornes-meta" hidden></p>
       </div>
@@ -126,7 +120,10 @@
     <div class="popup popup-carte" role="dialog" aria-modal="true" aria-labelledby="titre-carte">
       <button class="bouton-fermer" id="bouton-fermer-carte" aria-label="Fermer la carte">×</button>
       <h2 id="titre-carte">Parcours sur la carte</h2>
-      <p class="popup-trajet" id="carte-sous-titre"></p>
+      <div class="carte-entete">
+        <p class="popup-trajet" id="carte-sous-titre"></p>
+        <button type="button" class="bouton-carte bouton-carte-detail bouton-waze" id="bouton-waze-carte">🚗 Dans Waze</button>
+      </div>
       <div id="carte" class="carte-osm"></div>
       <p class="popup-note carte-legende">
         <span class="legende-depart">●</span> départ&nbsp;·
