@@ -367,6 +367,14 @@
         texte += ' — à ' + borne.distanceM + ' m';
       }
       element.textContent = texte;
+      // Enseigne accueillant la borne (ex. McDonald's) : pratique pour
+      // recharger pendant la pause
+      if (borne.enseigne) {
+        var badge = document.createElement('span');
+        badge.className = 'borne-enseigne';
+        badge.textContent = '🍔 ' + borne.enseigne;
+        element.appendChild(badge);
+      }
       bloc.appendChild(element);
     });
     return bloc;
