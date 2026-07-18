@@ -98,7 +98,10 @@
       <div class="tarif-direct" id="tarif-direct">
         <span class="tarif-direct-libelle">Tarif sans sortie d'autoroute</span>
         <span class="tarif-direct-prix" id="prix-direct">—</span>
-        <button type="button" class="bouton-carte" id="bouton-carte-direct">🗺 Afficher sur la carte</button>
+        <span class="boutons-solution">
+          <button type="button" class="bouton-carte" id="bouton-carte-direct">🗺 Afficher sur la carte</button>
+          <button type="button" class="bouton-carte bouton-waze" id="bouton-waze-direct">🚗 Dans Waze</button>
+        </span>
       </div>
 
       <h3 class="titre-tags">Le moins cher avec des sorties intermédiaires</h3>
@@ -106,7 +109,10 @@
 
       <div class="detail-sorties" id="detail-sorties" hidden>
         <h4 id="detail-titre"></h4>
-        <button type="button" class="bouton-carte bouton-carte-detail" id="bouton-carte-detail">🗺 Afficher sur la carte</button>
+        <span class="boutons-solution">
+          <button type="button" class="bouton-carte bouton-carte-detail" id="bouton-carte-detail">🗺 Afficher sur la carte</button>
+          <button type="button" class="bouton-carte bouton-carte-detail bouton-waze" id="bouton-waze-detail">🚗 Dans Waze</button>
+        </span>
         <ul id="detail-liste"></ul>
         <p class="bornes-meta" id="bornes-meta" hidden></p>
       </div>
@@ -128,6 +134,19 @@
         <span class="legende-sortie">●</span> sorties conseillées&nbsp;·
         <span class="legende-gare">●</span> gares traversées
       </p>
+    </div>
+  </div>
+
+  <!-- Pop-up d'envoi vers Waze -->
+  <div class="voile" id="voile-waze" hidden>
+    <div class="popup popup-waze" role="dialog" aria-modal="true" aria-labelledby="titre-waze">
+      <button class="bouton-fermer" id="bouton-fermer-waze" aria-label="Fermer">×</button>
+      <h2 id="titre-waze">🚗 Envoyer le trajet vers Waze</h2>
+      <p class="popup-trajet" id="waze-sous-titre"></p>
+      <p class="waze-note">Waze n'accepte qu'une destination à la fois&nbsp;: lancez la première étape,
+         puis la suivante à chaque arrêt. Sur mobile, le lien ouvre directement l'application Waze
+         et démarre le guidage.</p>
+      <ol class="waze-etapes" id="waze-etapes"></ol>
     </div>
   </div>
 
