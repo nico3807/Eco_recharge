@@ -311,6 +311,30 @@ body {
 
 .tarif-direct-prix { font-size: 1.6rem; font-weight: 800; white-space: nowrap; }
 
+.bouton-carte {
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.bouton-carte:hover { background: rgba(255, 255, 255, 0.25); }
+
+.bouton-carte-detail {
+  border-color: var(--vert);
+  background: #fff;
+  color: var(--vert-fonce);
+  margin-bottom: 0.6rem;
+}
+
+.bouton-carte-detail:hover { background: var(--vert); color: #fff; }
+
 .titre-tags { font-size: 1rem; margin: 1.3rem 0 0.6rem; }
 
 /* --- Tags 1 à 5 sorties --------------------------------------- */
@@ -417,6 +441,35 @@ body {
   margin: 1.1rem 0 0;
   font-size: 0.8rem;
   color: var(--gris-texte);
+}
+
+/* --- Pop-up carte OpenStreetMap --------------------------------- */
+
+.popup-carte {
+  width: min(860px, 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+.carte-osm {
+  width: 100%;
+  height: min(58vh, 520px);
+  border-radius: 10px;
+  border: 1.5px solid var(--gris-bordure);
+  z-index: 0;
+}
+
+.carte-legende { font-size: 0.85rem; }
+
+.legende-depart { color: #1a7f4b; }
+.legende-arrivee { color: #c0392b; }
+.legende-sortie { color: #f5a623; }
+.legende-gare { color: #b8c4cf; }
+
+@media (max-width: 640px) {
+  .tarif-direct { flex-wrap: wrap; }
+  .bouton-carte { width: 100%; margin-top: 0.4rem; }
+  .bouton-carte-detail { width: auto; margin-top: 0; }
 }
 
 /* --- Pied de page ---------------------------------------------- */

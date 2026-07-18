@@ -33,11 +33,21 @@
   var bornesMeta = document.getElementById('bornes-meta');
   var popupNote = document.getElementById('popup-note');
 
+  var voileCarte = document.getElementById('voile-carte');
+  var boutonFermerCarte = document.getElementById('bouton-fermer-carte');
+  var boutonCarteDirect = document.getElementById('bouton-carte-direct');
+  var boutonCarteDetail = document.getElementById('bouton-carte-detail');
+  var titreCarte = document.getElementById('titre-carte');
+  var carteSousTitre = document.getElementById('carte-sous-titre');
+
   var gares = [];
   var modeLocal = false;   // true si l'API est indisponible (calcul navigateur)
   var donneesLocales = null;
   var resultatCourant = null;      // dernier résultat affiché dans la pop-up
   var metaBornesCourante = null;   // métadonnées bornes du dernier résultat
+  var indexParcoursCourant = 0;    // parcours sélectionné dans la pop-up
+  var alternativeCourante = null;  // solution (1-5 sorties) affichée en détail
+  var carteLeaflet = null;         // instance Leaflet de la pop-up carte
 
   /* --- Utilitaires ------------------------------------------------------- */
 
@@ -240,6 +250,8 @@
   function afficherParcours(index) {
     var resultat = resultatCourant;
     var parcours = resultat.parcours[index];
+    indexParcoursCourant = index;
+    alternativeCourante = null;
 
     popupTrajet.textContent = resultat.depart.nom + ' (' + resultat.depart.autoroute + ') → ' +
       resultat.arrivee.nom + ' (' + resultat.arrivee.autoroute + ') — environ ' +
@@ -322,6 +334,7 @@
   }
 
   function afficherDetail(alternative) {
+    alternativeCourante = alternative;
     detailTitre.textContent = 'Où sortir avec ' + alternative.sorties +
       (alternative.sorties > 1 ? ' sorties ' : ' sortie ') + '(' + formaterPrix(alternative.prix) + ')';
     detailListe.innerHTML = '';
@@ -380,6 +393,94 @@
     return bloc;
   }
 
+  /* --- Pop-up carte OpenStreetMap ------------------------------------------ */
+
+  /**
+   * Ouvre la solution demandée sur une carte OpenStreetMap (Leaflet embarqué,
+   * tuiles tile.openstreetmap.org) : tracé du parcours, départ, arrivée,
+   * gares traversées et sorties conseillées avec leurs bornes éventuelles.
+   */
+  function ouvrirCarte(parcours, alternative) {
+    var resultat = resultatCourant;
+
+    titreCarte.textContent = alternative
+      ? 'Solution ' + alternative.sorties + (alternative.sorties > 1 ? ' sorties' : ' sortie') +
+        ' — ' + formaterPrix(alternative.prix)
+      : 'Trajet direct sans sortie — ' + formaterPrix(parcours.direct.prix);
+    carteSousTitre.textContent = resultat.depart.nom + ' → ' + resultat.arrivee.nom +
+      ' — ' + parcours.distanceKm + ' km, ' + parcours.description;
+
+    voileCarte.hidden = false;
+    document.body.style.overflow = 'hidden';
+
+    // Réinitialise la carte à chaque ouverture
+    if (carteLeaflet) { carteLeaflet.remove(); carteLeaflet = null; }
+    carteLeaflet = L.map('carte', { scrollWheelZoom: true });
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(carteLeaflet);
+
+    var etapes = parcours.itineraire.filter(function (gare) {
+      return typeof gare.lat === 'number' && typeof gare.lon === 'number';
+    });
+    var points = etapes.map(function (gare) { return [gare.lat, gare.lon]; });
+
+    var trace = L.polyline(points, { color: '#1a7f4b', weight: 4, opacity: 0.85 }).addTo(carteLeaflet);
+
+    var idsSortie = {};
+    (alternative ? alternative.garesSortie : []).forEach(function (gare) { idsSortie[gare.id] = gare; });
+
+    etapes.forEach(function (gare, index) {
+      var estDepart = index === 0;
+      var estArrivee = index === etapes.length - 1;
+      var sortie = idsSortie[gare.id];
+
+      var style;
+      if (estDepart) style = { radius: 9, color: '#115c36', fillColor: '#1a7f4b', fillOpacity: 1 };
+      else if (estArrivee) style = { radius: 9, color: '#7f1d1d', fillColor: '#c0392b', fillOpacity: 1 };
+      else if (sortie) style = { radius: 8, color: '#9a6200', fillColor: '#f5a623', fillOpacity: 1 };
+      else style = { radius: 4, color: '#5a6672', fillColor: '#b8c4cf', fillOpacity: 0.9 };
+
+      var marqueur = L.circleMarker([gare.lat, gare.lon], Object.assign({ weight: 2 }, style))
+        .addTo(carteLeaflet);
+
+      var contenu = '<strong>' + gare.nom + '</strong> (' + gare.autoroute + ')';
+      if (estDepart) contenu += '<br>Départ';
+      if (estArrivee) contenu += '<br>Arrivée';
+      if (sortie) {
+        contenu += '<br>Sortie conseillée : sortez puis reprenez aussitôt l’autoroute';
+        (sortie.bornes || []).forEach(function (borne) {
+          contenu += '<br>⚡ ' + borne.nom + (borne.puissanceKw ? ' — ' + borne.puissanceKw + ' kW' : '') +
+                     (borne.distanceM ? ' — à ' + borne.distanceM + ' m' : '');
+        });
+      }
+      marqueur.bindPopup(contenu);
+    });
+
+    carteLeaflet.fitBounds(trace.getBounds(), { padding: [30, 30] });
+    // La carte est créée dans une pop-up qui vient d'apparaître : recalcule sa taille
+    setTimeout(function () { if (carteLeaflet) carteLeaflet.invalidateSize(); }, 60);
+  }
+
+  function fermerCarte() {
+    voileCarte.hidden = true;
+    if (carteLeaflet) { carteLeaflet.remove(); carteLeaflet = null; }
+    // La pop-up de résultat est toujours ouverte derrière
+    document.body.style.overflow = voile.hidden ? '' : 'hidden';
+  }
+
+  boutonCarteDirect.addEventListener('click', function () {
+    ouvrirCarte(resultatCourant.parcours[indexParcoursCourant], null);
+  });
+  boutonCarteDetail.addEventListener('click', function () {
+    ouvrirCarte(resultatCourant.parcours[indexParcoursCourant], alternativeCourante);
+  });
+  boutonFermerCarte.addEventListener('click', fermerCarte);
+  voileCarte.addEventListener('click', function (evenement) {
+    if (evenement.target === voileCarte) fermerCarte();
+  });
+
   function fermerPopup() {
     voile.hidden = true;
     document.body.style.overflow = '';
@@ -390,7 +491,9 @@
     if (evenement.target === voile) fermerPopup();
   });
   document.addEventListener('keydown', function (evenement) {
-    if (evenement.key === 'Escape' && !voile.hidden) fermerPopup();
+    if (evenement.key !== 'Escape') return;
+    if (!voileCarte.hidden) return fermerCarte();
+    if (!voile.hidden) fermerPopup();
   });
 
   initialiser();

@@ -19,6 +19,13 @@ notamment les **McDonald's**, dont les parkings sont équipés de bornes rapides
 Izivia 150 kW (pratique pour recharger pendant la pause). Le script de mise à
 jour les détecte dans les données OSM via les champs name/brand/operator.
 
+Chaque solution (trajet direct ou découpage en 1-5 sorties) dispose d'un
+bouton **🗺 Afficher sur la carte** qui ouvre le parcours dans une seconde
+pop-up sur fond **OpenStreetMap** (bibliothèque Leaflet embarquée dans
+`js/vendor/leaflet/`, tuiles tile.openstreetmap.org) : tracé du trajet,
+départ, arrivée, gares traversées et sorties conseillées — avec leurs bornes
+de recharge au clic quand l'option ⚡ est active.
+
 Si l'itinéraire le plus court comprend une **portion hors autoroute**
 (traversée de Lyon, rocade de Bordeaux, Francilienne…), la pop-up propose
 d'abord le **choix du parcours** : chaque option indique la distance, le tarif
@@ -139,9 +146,10 @@ chaque gare (filtre géographique 1 km), garde les bornes rapides et écrit
 ## Structure du projet
 
 ```
-├── index.html          Interface (formulaire + pop-up de résultat)
+├── index.html          Interface (formulaire + pop-ups résultat et carte)
 ├── css/style.css       Styles responsive (mobile first)
-├── js/app.js           Logique de l'interface (fetch API, pop-up, tags)
+├── js/app.js           Logique de l'interface (fetch API, pop-ups, tags, carte)
+├── js/vendor/leaflet/  Bibliothèque Leaflet 1.9.4 embarquée (carte OSM)
 ├── js/moteur.js        Moteur de calcul partagé serveur/navigateur
 │                       (graphe, Dijkstra, tarification, optimisation 1-5 sorties)
 ├── data/reseau.json    Gares de péage (avec coordonnées GPS) et jonctions

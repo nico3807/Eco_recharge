@@ -39,7 +39,9 @@
           id: gare.id,
           nom: gare.nom,
           autoroute: autoroute.code,
-          nomAutoroute: autoroute.nom
+          nomAutoroute: autoroute.nom,
+          lat: gare.lat,
+          lon: gare.lon
         };
         if (i > 0) {
           var precedente = autoroute.gares[i - 1];
@@ -285,7 +287,7 @@
 
     function decrireGare(id) {
       var gare = graphe.gares[id];
-      return { id: gare.id, nom: gare.nom, autoroute: gare.autoroute };
+      return { id: gare.id, nom: gare.nom, autoroute: gare.autoroute, lat: gare.lat, lon: gare.lon };
     }
 
     var alternatives = [];
@@ -339,7 +341,7 @@
 
     function decrireGare(id) {
       var gare = graphe.gares[id];
-      return { id: gare.id, nom: gare.nom, autoroute: gare.autoroute };
+      return { id: gare.id, nom: gare.nom, autoroute: gare.autoroute, lat: gare.lat, lon: gare.lon };
     }
 
     return {
