@@ -30,8 +30,11 @@ Le bouton **🚗 Dans Waze** envoie la solution vers l'application **Waze** :
 un panneau liste le trajet en étapes ordonnées (entrée d'autoroute, chaque
 sortie conseillée avec ses bornes, arrivée), chacune avec son lien de
 navigation `waze.com/ul` qui ouvre l'appli et démarre le guidage sur mobile.
-Waze n'acceptant qu'une destination à la fois, on lance l'étape suivante à
-chaque arrêt.
+Les [liens web Waze](https://developers.google.com/waze/deeplinks) ne
+transmettent qu'une destination à la fois (« Ajouter un arrêt » n'existe qu'à
+l'intérieur de l'application, pour un seul arrêt actif) : on lance donc
+l'étape suivante à chaque arrêt, ou l'arrivée directement en ajoutant les
+arrêts depuis Waze.
 
 Si l'itinéraire le plus court comprend une **portion hors autoroute**
 (traversée de Lyon, rocade de Bordeaux, Francilienne…), la pop-up propose
