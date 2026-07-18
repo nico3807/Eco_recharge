@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Calculez le trajet autoroutier le moins cher entre deux gares de péage françaises, avec ou sans sorties intermédiaires.">
   <title>Éco-Péage — Trajets autoroutiers au meilleur prix</title>
+  <link rel="stylesheet" href="js/vendor/leaflet/leaflet.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;🛣️&lt;/text&gt;&lt;/svg&gt;">
 </head>
@@ -97,6 +98,7 @@
       <div class="tarif-direct" id="tarif-direct">
         <span class="tarif-direct-libelle">Tarif sans sortie d'autoroute</span>
         <span class="tarif-direct-prix" id="prix-direct">—</span>
+        <button type="button" class="bouton-carte" id="bouton-carte-direct">🗺 Afficher sur la carte</button>
       </div>
 
       <h3 class="titre-tags">Le moins cher avec des sorties intermédiaires</h3>
@@ -104,11 +106,28 @@
 
       <div class="detail-sorties" id="detail-sorties" hidden>
         <h4 id="detail-titre"></h4>
+        <button type="button" class="bouton-carte bouton-carte-detail" id="bouton-carte-detail">🗺 Afficher sur la carte</button>
         <ul id="detail-liste"></ul>
         <p class="bornes-meta" id="bornes-meta" hidden></p>
       </div>
 
       <p class="popup-note" id="popup-note"></p>
+    </div>
+  </div>
+
+  <!-- Pop-up carte OpenStreetMap -->
+  <div class="voile" id="voile-carte" hidden>
+    <div class="popup popup-carte" role="dialog" aria-modal="true" aria-labelledby="titre-carte">
+      <button class="bouton-fermer" id="bouton-fermer-carte" aria-label="Fermer la carte">×</button>
+      <h2 id="titre-carte">Parcours sur la carte</h2>
+      <p class="popup-trajet" id="carte-sous-titre"></p>
+      <div id="carte" class="carte-osm"></div>
+      <p class="popup-note carte-legende">
+        <span class="legende-depart">●</span> départ&nbsp;·
+        <span class="legende-arrivee">●</span> arrivée&nbsp;·
+        <span class="legende-sortie">●</span> sorties conseillées&nbsp;·
+        <span class="legende-gare">●</span> gares traversées
+      </p>
     </div>
   </div>
 
@@ -119,6 +138,7 @@
     </div>
   </footer>
 
+  <script src="js/vendor/leaflet/leaflet.js"></script>
   <script src="js/moteur.js"></script>
   <script src="js/app.js"></script>
 </body>
