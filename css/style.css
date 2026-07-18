@@ -335,6 +335,75 @@ body {
 
 .bouton-carte-detail:hover { background: var(--vert); color: #fff; }
 
+.boutons-solution {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.bouton-waze {
+  border-color: #6ecdf5;
+  background: rgba(51, 204, 255, 0.18);
+}
+
+.bouton-waze:hover { background: rgba(51, 204, 255, 0.35); }
+
+.bouton-carte-detail.bouton-waze {
+  border-color: #33ccff;
+  background: #fff;
+  color: #0b6e93;
+}
+
+.bouton-carte-detail.bouton-waze:hover { background: #33ccff; color: #fff; }
+
+/* --- Pop-up Waze ------------------------------------------------ */
+
+.waze-note {
+  font-size: 0.88rem;
+  color: var(--gris-texte);
+  background: #e8f7fd;
+  border: 1.5px solid #a5e2f8;
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+  margin: 0 0 1rem;
+}
+
+.waze-etapes {
+  margin: 0;
+  padding-left: 1.4rem;
+}
+
+.waze-etapes li { margin-bottom: 0.55rem; }
+
+.waze-lien {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  text-decoration: none;
+  color: var(--bleu-nuit);
+  background: #fff;
+  border: 1.5px solid var(--gris-bordure);
+  border-radius: 8px;
+  padding: 0.55rem 0.85rem;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.waze-lien:hover { border-color: #33ccff; background: #e8f7fd; }
+
+.waze-lien strong { font-size: 0.9rem; }
+
+.waze-lien span { font-size: 0.92rem; }
+
+.waze-lien small { color: var(--gris-texte); }
+
+.waze-lien::after {
+  content: 'Ouvrir dans Waze ➜';
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #0b6e93;
+  margin-top: 0.15rem;
+}
+
 .titre-tags { font-size: 1rem; margin: 1.3rem 0 0.6rem; }
 
 /* --- Tags 1 à 5 sorties --------------------------------------- */

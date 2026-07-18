@@ -40,6 +40,13 @@
   var titreCarte = document.getElementById('titre-carte');
   var carteSousTitre = document.getElementById('carte-sous-titre');
 
+  var voileWaze = document.getElementById('voile-waze');
+  var boutonFermerWaze = document.getElementById('bouton-fermer-waze');
+  var boutonWazeDirect = document.getElementById('bouton-waze-direct');
+  var boutonWazeDetail = document.getElementById('bouton-waze-detail');
+  var wazeSousTitre = document.getElementById('waze-sous-titre');
+  var wazeEtapes = document.getElementById('waze-etapes');
+
   var gares = [];
   var modeLocal = false;   // true si l'API est indisponible (calcul navigateur)
   var donneesLocales = null;
@@ -481,6 +488,82 @@
     if (evenement.target === voileCarte) fermerCarte();
   });
 
+  /* --- Pop-up d'envoi vers Waze -------------------------------------------- */
+
+  /** Lien universel Waze : ouvre l'application (mobile) ou la carte live (bureau). */
+  function lienWaze(lat, lon) {
+    return 'https://www.waze.com/ul?ll=' + lat + '%2C' + lon + '&navigate=yes&zoom=16';
+  }
+
+  /**
+   * Ouvre le panneau « Envoyer vers Waze » pour la solution demandée : la
+   * liste ordonnée des étapes du trajet (entrée d'autoroute, sorties
+   * conseillées, arrivée), chacune avec son lien de navigation Waze. Waze ne
+   * gère pas les étapes multiples dans un même lien, d'où le pas-à-pas.
+   */
+  function ouvrirWaze(parcours, alternative) {
+    var resultat = resultatCourant;
+
+    wazeSousTitre.textContent = resultat.depart.nom + ' → ' + resultat.arrivee.nom +
+      (alternative
+        ? ' — solution ' + alternative.sorties + (alternative.sorties > 1 ? ' sorties' : ' sortie') +
+          ' (' + formaterPrix(alternative.prix) + ')'
+        : ' — trajet direct (' + formaterPrix(parcours.direct.prix) + ')');
+
+    var etapes = [{ role: "Entrée d'autoroute", gare: resultat.depart }];
+    (alternative ? alternative.garesSortie : []).forEach(function (gare, index) {
+      etapes.push({ role: 'Arrêt ' + (index + 1) + ' — sortez puis reprenez l’autoroute', gare: gare });
+    });
+    etapes.push({ role: 'Arrivée', gare: resultat.arrivee });
+
+    wazeEtapes.innerHTML = '';
+    etapes.forEach(function (etape) {
+      var element = document.createElement('li');
+
+      var lien = document.createElement('a');
+      lien.className = 'waze-lien';
+      lien.href = lienWaze(etape.gare.lat, etape.gare.lon);
+      lien.target = '_blank';
+      lien.rel = 'noopener';
+
+      var role = document.createElement('strong');
+      role.textContent = etape.role;
+      var nom = document.createElement('span');
+      nom.textContent = etape.gare.nom + ' (' + etape.gare.autoroute + ')';
+      lien.appendChild(role);
+      lien.appendChild(nom);
+
+      var bornes = etape.gare.bornes || [];
+      if (bornes.length > 0) {
+        var borne = document.createElement('small');
+        borne.textContent = '⚡ ' + bornes.map(function (b) { return b.nom; }).join(' · ');
+        lien.appendChild(borne);
+      }
+
+      element.appendChild(lien);
+      wazeEtapes.appendChild(element);
+    });
+
+    voileWaze.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function fermerWaze() {
+    voileWaze.hidden = true;
+    document.body.style.overflow = voile.hidden ? '' : 'hidden';
+  }
+
+  boutonWazeDirect.addEventListener('click', function () {
+    ouvrirWaze(resultatCourant.parcours[indexParcoursCourant], null);
+  });
+  boutonWazeDetail.addEventListener('click', function () {
+    ouvrirWaze(resultatCourant.parcours[indexParcoursCourant], alternativeCourante);
+  });
+  boutonFermerWaze.addEventListener('click', fermerWaze);
+  voileWaze.addEventListener('click', function (evenement) {
+    if (evenement.target === voileWaze) fermerWaze();
+  });
+
   function fermerPopup() {
     voile.hidden = true;
     document.body.style.overflow = '';
@@ -492,6 +575,7 @@
   });
   document.addEventListener('keydown', function (evenement) {
     if (evenement.key !== 'Escape') return;
+    if (!voileWaze.hidden) return fermerWaze();
     if (!voileCarte.hidden) return fermerCarte();
     if (!voile.hidden) fermerPopup();
   });
