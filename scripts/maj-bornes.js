@@ -67,10 +67,26 @@ function puissanceKw(champs) {
   return max;
 }
 
-/** Considère une borne comme « rapide » : puissance ≥ seuil, ou prise DC connue. */
+/**
+ * Enseigne accueillant la borne, quand elle est identifiable dans les
+ * données OSM (champs name/brand/operator). On repère notamment les
+ * McDonald's, qui déploient des bornes rapides Izivia (150 kW) sur leurs
+ * parkings : idéal pour recharger pendant la pause.
+ */
+function enseigneBorne(champs) {
+  const texte = JSON.stringify(champs).toLowerCase();
+  if (/mc\s?donald/.test(texte)) return "McDonald's";
+  return null;
+}
+
+/**
+ * Considère une borne comme « rapide » : puissance ≥ seuil, prise DC connue,
+ * ou borne d'enseigne dont le parc est rapide (McDonald's/Izivia 150 kW).
+ */
 function estRapide(champs) {
   const kw = puissanceKw(champs);
   if (kw !== null) return kw >= PUISSANCE_MIN_KW;
+  if (enseigneBorne(champs) === "McDonald's") return true;
   const texte = JSON.stringify(champs).toLowerCase();
   return /chademo|combo|ccs|supercharger|ionity/.test(texte);
 }
@@ -94,6 +110,7 @@ async function bornesAutourDe(datasetId, gare) {
       return {
         nom: nomBorne(champs),
         operateur: champs.operator || champs.operateur || champs.network || null,
+        enseigne: enseigneBorne(champs),
         puissanceKw: puissanceKw(champs),
         distanceM: lat !== null ? Math.round(distanceMetres(gare.lat, gare.lon, lat, lon)) : null,
         rapide: estRapide(champs)

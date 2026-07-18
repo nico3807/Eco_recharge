@@ -384,6 +384,20 @@ body {
   font-size: 0.88rem;
 }
 
+.borne-enseigne {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background: #fdeecd;
+  border: 1px solid #f0c675;
+  color: #7a5307;
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-style: normal;
+  white-space: nowrap;
+}
+
 .borne-absente {
   border-style: dashed;
   border-color: var(--gris-bordure);

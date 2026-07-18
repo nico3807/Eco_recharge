@@ -14,6 +14,10 @@ les autoroutes françaises couvertes. Après validation, une **pop-up** affiche 
 Avec l'option **⚡ Avec recharge électrique**, le détail de chaque sortie
 proposée affiche en plus les **bornes de recharge rapide (≥ 50 kW) situées à
 moins d'1 km** de la gare de sortie : nom, opérateur, puissance et distance.
+Les bornes installées chez des **enseignes** sont identifiées par un badge —
+notamment les **McDonald's**, dont les parkings sont équipés de bornes rapides
+Izivia 150 kW (pratique pour recharger pendant la pause). Le script de mise à
+jour les détecte dans les données OSM via les champs name/brand/operator.
 
 Si l'itinéraire le plus court comprend une **portion hors autoroute**
 (traversée de Lyon, rocade de Bordeaux, Francilienne…), la pop-up propose
