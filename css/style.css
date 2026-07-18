@@ -348,6 +348,21 @@ body {
 
 .carte-entete .bouton-waze { margin-bottom: 0; }
 
+.boutons-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.bouton-maps {
+  border-color: #34a853;
+  background: #fff;
+  color: #1e7e34;
+  margin-bottom: 0;
+}
+
+.bouton-maps:hover { background: #34a853; color: #fff; }
+
 .bouton-waze {
   border-color: #6ecdf5;
   background: rgba(51, 204, 255, 0.18);

@@ -37,6 +37,11 @@ l'intérieur de l'application, pour un seul arrêt actif) : on lance donc
 l'étape suivante à chaque arrêt, ou l'arrivée directement en ajoutant les
 arrêts depuis Waze.
 
+Le bouton **📍 Dans Maps** (sous « Dans Waze ») envoie en revanche le trajet
+**complet avec les arrêts sélectionnés en un seul lien** vers Google Maps :
+son format d'URL (`google.com/maps/dir/?api=1&waypoints=…`) accepte les
+étapes multiples, contrairement à Waze.
+
 Si l'itinéraire le plus court comprend une **portion hors autoroute**
 (traversée de Lyon, rocade de Bordeaux, Francilienne…), la pop-up propose
 d'abord le **choix du parcours** : chaque option indique la distance, le tarif

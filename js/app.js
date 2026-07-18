@@ -43,6 +43,7 @@
   var voileWaze = document.getElementById('voile-waze');
   var boutonFermerWaze = document.getElementById('bouton-fermer-waze');
   var boutonWazeCarte = document.getElementById('bouton-waze-carte');
+  var boutonMapsCarte = document.getElementById('bouton-maps-carte');
   var wazeSousTitre = document.getElementById('waze-sous-titre');
   var wazeEtapes = document.getElementById('waze-etapes');
 
@@ -557,6 +558,30 @@
   boutonWazeCarte.addEventListener('click', function () {
     ouvrirWaze(solutionCarte.parcours, solutionCarte.alternative);
   });
+
+  /**
+   * « Dans Maps » : contrairement à Waze, les URLs Google Maps acceptent des
+   * étapes multiples (paramètre waypoints, jusqu'à 9) — le trajet complet
+   * avec les arrêts sélectionnés part donc en un seul lien.
+   */
+  function ouvrirMaps(parcours, alternative) {
+    var resultat = resultatCourant;
+    var point = function (gare) { return gare.lat + ',' + gare.lon; };
+    var url = 'https://www.google.com/maps/dir/?api=1' +
+      '&origin=' + encodeURIComponent(point(resultat.depart)) +
+      '&destination=' + encodeURIComponent(point(resultat.arrivee)) +
+      '&travelmode=driving';
+    var arrets = (alternative ? alternative.garesSortie : []).map(point);
+    if (arrets.length > 0) {
+      url += '&waypoints=' + encodeURIComponent(arrets.join('|'));
+    }
+    window.open(url, '_blank', 'noopener');
+  }
+
+  boutonMapsCarte.addEventListener('click', function () {
+    ouvrirMaps(solutionCarte.parcours, solutionCarte.alternative);
+  });
+
   boutonFermerWaze.addEventListener('click', fermerWaze);
   voileWaze.addEventListener('click', function (evenement) {
     if (evenement.target === voileWaze) fermerWaze();
